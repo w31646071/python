@@ -684,17 +684,633 @@ favorite_languages = {
 for name in sorted(favorite_languages.keys()):  # 可以使用sorted()来获得按特定顺序排列的键列表的副本
     print(f"{name.title()},thank you for taking the poll.")
 """
+"""
+favorite_languages = {
+    'jen':'python',
+    'sarah':'c',
+    'edward':'ruby',
+    'phil':'python',
+}
+print("the following languages have been mentioned:")
+for language in favorite_languages.values():  # value()可以返回一个值列表，不包含任何键
+    print(language.title())
+"""
+"""
+favorite_languages = {
+    'jen':'python',
+    'sarah':'c',
+    'edward':'ruby',
+    'phil':'python',
+}
+print("the following languages have been mentioned:")
+for language in set(favorite_languages.values()):  # 集合set函数可以剔除重复项
+    print(language.title())
+"""
+"""
+dicts = {
+    'list':'列表',
+    'var':'变量',
+    'int':'整型',
+    'boolean':'布尔',
+    'str':'字符串',
+}
+for keys,value in dicts.items():
+    print(keys,value)
+"""
+"""
+places = {
+    "中国":"长江",
+    "埃及":"尼罗河",
+    "巴西":"亚马逊河",
+}
+for place, river in places.items():
+    print(f"the {river} runs through {place}")
+for river in places.values():  # values()函数：只打印内容
+    print(river)  # 打印河流名字
+for place in places.keys():  # keys()函数：只打印键
+    print(place)  # 打印国家名字
+"""
+"""
+favorite_languages = {
+    'jen':'python',
+    'sarah':'c',
+    'edward':'ruby',
+    'phil':'python',
+}
+invited_people = ['jen','sarah','wang']
+for name in invited_people:
+    if name in favorite_languages.keys():
+        print(f'{name.title()},thank you !')
+    else:
+        print(f'{name.title()},can you want get my invited ?')
+"""
+"""
+alien_0 = {'color':'green','point':5}
+alien_1 = {'color':'yellow','point':10}
+alien_2 = {'color':'red','point':15}
+aliens = [alien_0,alien_1,alien_2]
+for alien in aliens:
+    print(alien)
+"""
+"""
+aliens = []  # 创建一个用于存储外星人的空列表
+for alien_number in range(30):  # 创建30个外星人
+    new_alien = {'color':'green','point':5,'speed':'slow'}
+    aliens.append(new_alien)
+for alien in aliens[:5]:  # 显示前5个外星人
+    print(alien)
+print(len(aliens))
+"""
+"""
+aliens = []
+for alien_number in range(30):
+    new_alien = {'color':'green','point':5,'speed':'slow'}
+    aliens.append(new_alien)
+for alien in aliens[:3]:
+    if alien['color'] == 'green':
+        alien['color'] = 'yellow'
+        alien['speed'] = 'medium'
+        alien['point'] = 10
+for alien in aliens[:5]:
+    print(alien)
+"""
+"""
+aliens = []
+for alien_number in range(30):
+    new_alien = {'color':'green','point':5,'speed':'slow'}
+    aliens.append(new_alien)
+for alien in aliens[0:3]:
+    if alien['color'] == 'green':
+        alien['color'] = 'yellow'
+        alien['speed'] = 'medium'
+        alien['point'] = 10
+for alien in aliens[0:3]:
+    if alien['color'] == 'yellow':
+        alien['color'] = 'red'
+        alien['speed'] = 'fast'
+        alien['point'] = 15
+for alien in aliens[0:5]:
+    print(alien)
+"""
+"""
+pizza = {'crust': 'thick',
+         'toppings': ['mushrooms', 'extra cheese'],  # 可以在字典中存储一个列表
+         }
+print(pizza['crust'])
+print(f"\npizza['toppings']")
+for topping in pizza['toppings']:
+    print(topping)
+"""
+"""
+favorite_languages = {
+    'jen': ['python', 'ruby'],
+    'sarah': ['c'],
+    'edward': ['ruby', 'c'],
+    'phil': ['python', 'haskell'],
+}
+for name, languages in favorite_languages.items():
+    print(f"{name.title()} favorite languages are:")
+    for language in languages:
+     print(f"{language.title()}")
+"""
+"""
+favorite_languages = {
+    'jen': ['python', 'ruby'],
+    'sarah': ['c'],
+    'edward': ['ruby', 'c'],
+    'phil': ['python', 'haskell'],
+}
+for name, languages in favorite_languages.items():
+    if len(languages) == 1:
+        print(f"{name.title()} favorite language is")  # 加入一个判定条件，如果只有一个语言，那按单数语句输出
+    else:
+        print(f"{name.title()} favorite languages are:")
+    for language in languages:
+        print(f"{language.title()}")
+"""
+"""
+users = {
+    'aeinstein': {
+        'first': 'albert',
+        'lost': 'einstein',
+        'location': 'princeton',
+    },
+    'mcurie': {
+        'first': 'maire',
+        'lost': 'curie',
+        'location': 'paris',
+    },
+}
+for username, user_info in users.items():  # 遍历字典users，将每个键赋给变量username，同时将与当前键相关联的字典赋值给变量user_info
+    print(f"\nUsername:{username}")
+    fullname = f"{user_info['first'].title()} {user_info['lost'].title()}"  # 访问内部字典
+    location = user_info['location']
+    print(f"\tFull name:{fullname}")
+    print(f"\tLocation:{location.title()}")
+"""
+"""
+lisa = {
+    'first_name': 'li',
+    'last_name': 'chen',
+    'age': 18,
+    'city': 'nanchang',
+}
+mary = {
+    'first_name': 'wang',
+    'last_name': 'fang',
+    'age': 25,
+    'city': 'chengdu',
+}
+jack = {
+    'first_name': 'zhang',
+    'last_name': 'peng',
+    'age': 12,
+    'city': 'shanghai',
+}
+people = [lisa, mary, jack]  # 将字典存储于列表中时，字典名不需要加引号
+for peo in people:
+    print(peo)
+for peo in people:
+    print(f"name:{peo['first_name']}{peo['last_name']}")
+    print(f"age:{peo['age']}")
+    print(f"city:{peo['city']}")
+"""
+"""
+first = {
+    'zhonglei':'mao',
+    'zhuren':'wang',
+}
+second = {
+    'zhonglei':'eyu',
+    'zhuren':'wang2',
+}
+third = {
+    'zhonglei':'she',
+    'zhuren':'wang3'
+}
+pets = [first,second,third]
+for pet in pets:
+    print(f"zhonglei:{pet['zhonglei']}")
+    print(f"zhuren:{pet['zhuren']}")
+"""
+"""
+favorite_places = {
+    'wang1': ['1', '2', '3'],
+    'wang2': ['4', '5', '6'],
+    'wang3': ['7', '8', '9'],
+}
+for name,places in favorite_places.items():
+    print(f"{name.title()}:{places}")
+"""
+"""
+cities = {
+    'hengshui': {
+        'country': 'zhongguo',
+        'population': 'shiwuwan',
+        'fact': 'jiaoyu',
+    },
+    'qinhuangdao':{
+        'country':'zhongguo',
+        'population':'shisiwan',
+        'fact':'jiaoyuhao,'
+    },
+    'beijing':{
+        'country':'zhongguo',
+        'population':'shiduowan',
+        'fact':'henfu',
+    },
+}
+for city,city_info in cities.items():  # 遍历字典时不要忘记.items()
+    print(f"name:{city}")
+    print(f"国家:{city_info['country']}")
+    population = city_info['population']
+    print(f"人口:{population}")
+    fact = city_info['fact']
+    print(f"事实:{fact}")
+"""
+# 第七章:用户输入和while循环
+"""
+message = input("tell me something,and i will repeat it back to you:")
+# input()让程序暂停运行，等待用户输入一些文本，获取输入后，将其赋值给一个变量
+print(message)
+"""
+"""
+name = input("please enter your name:")
+print(f"hello,{name}!")
+"""
+"""
+prompt = "if you tell us who you are,we can personalize the messages you see"
+prompt += "\nwhat is your first name?"
+name = input(prompt)
+# 可以将提示赋值给一个变量a，再将该变量a传递给函数input()
+print(f"\nhello,{name}")
+"""
+"""
+age = input("how old are you?")
+age = int(age)  # int()函数将用户的输入视为数值,在不使用int()函数的情况下，用户输入为字符串，不能作为数字使用
+if age < 4 :
+    print('free')
+elif 4 <= age < 18:
+    print('25')
+elif 18 <= age < 65:
+    print('40')
+else:
+    print('20')
+"""
+"""
+height = input("how tall are you,in inches?\n")
+height = int(height)
+if height >= 48:
+    print('收费')
+else:
+    print('不收费')
+"""
+"""
+number = input("enter a number,and i can tell you if it is even or odd:\n")
+number = int(number)
+if number % 2 == 0:  # %：求模运算，即求余数，如果一个数可以被另一个数整除，则返回值为0，否则，返回余数
+    print(f"{number} is even")
+else:
+    print(f"{number} is odd")
+"""
+"""
+car = input('what car would you like?\n')
+print(f"let me see if i can find a {car.title()}")
+"""
+"""
+number = input("你有多少人就餐？\n")
+number = int(number)
+if number >= 8:
+    print("没座")
+else:
+    print("有座")
+"""
+"""
+number = input()
+number = int(number)
+if number % 10 == 0:
+    print(f"{number}是10的整数倍")
+else:
+    print(f"{number}不是10的整数倍")
+"""
+# while循环  while循环语句格式: while (表达式):    当表达式为真时，执行下面的语句，如果表达式为假，则跳出循环
+#                               {
+#                                   语句
+#                               }
+"""
+current_number = 1
+while current_number <= 5:
+    print(current_number)
+    current_number += 1
+"""
+"""
+prompt = "\ntell me something,and i will repeat it back to you:"
+prompt += "\n enter 'quit' to end the program \n"
+message = ""  # 创建变量message，用于记录输入的值
+while message != 'quit':
+    message = input(prompt)
+    if message != 'quit':
+        print(message)
+"""
+"""
+prompt = "\ntell me something,and i will repeat it back to you:"
+prompt += "\n enter 'quit' to end the program \n"
+active = True
+while active:
+    message = input(prompt)
+    if message == 'quit':
+        active = False
+    else:
+        print(message)
+"""
+# break语句使用
+"""
+prompt = "\nplease enter the name of city you have visited:"
+prompt += "\nenter 'quit' when you are finished \n"
+while True:  # 以while True开头的循环，如果没有遇到break语句，将不断运行
+    city = input(prompt)
+    if city == 'quit':
+        break  # break语句可以立即推出while循环，用于控制程序流程
+    else:
+        print(f"i would love to go to {city.title()}")
+"""
+# continue语句使用  与break语句不同的是，可以根据条件测试结果决定是否继续执行循环
+"""
+current_number = 0
+while current_number < 10:
+    current_number += 1
+    if current_number % 2 == 0:
+        continue  # 当if语句为真时，执行continue语句，忽略后面的语句并返回循环的开头
+    print(current_number)
+"""
+"""
+prompt = "\n输入一系列pizza配料:"
+prompt += "\n当你完成pizza配料时请输入'quit' \n"
+active = True
+while active:
+    peiliao = input(prompt)
+    if peiliao == 'quit':
+        active = False
+    else:
+        print(f"我们将添加{peiliao}到你的pizza中")
+"""
+"""
+message = "请告知你的年龄："
+while True:
+    age = input(message)
+    age = int(age)
+    if int(age) < 3:
+        print("free")
+        continue
+    elif 3 <= int(age) < 12:
+        print("10")
+        continue
+    elif int(age) >= 12:
+        print("15")
+        continue
+"""
+"""
+message = "请告知你的年龄："
+active = True
+while active:
+    age = input(message)
+    if age == 'quit':  
+        break
+    elif int(age) < 3:
+        print("free")
+        continue
+    elif 3 <= int(age) < 12:
+        print("10")
+        continue
+    elif int(age) >= 12:
+        print("15")
+        continue
+"""
+"""
+i = 1  # 一个无限循环的while循环
+active = True
+while active:
+    i = i+1
+    print(i)
+"""
+# 在列表中使用while循环
+"""
+unconfirmed_users = ['alice','brain','candace']
+confirmed_users = []
+while unconfirmed_users:  # while循环不断运行，直到目标列表为空
+    current_user = unconfirmed_users.pop()
+    print(f"verifying user: {current_user.title()}")
+    confirmed_users.append(current_user)
+print(f"\nthe following users have been confirmed:")
+for confirmed_user in confirmed_users:
+    print(confirmed_user.title())
+"""
+# 利用while循环删除为特定值的所有列表元素
+"""
+pets = ['dog','cat','dog','goldfish','cat','rabbit','cat']
+print(pets)
+while 'cat' in pets:
+    pets.remove('cat')
+print(pets)
+"""
+"""
+# 利用while循环使用用户输入填充字典
+responses = {}  # 建立一个空字典responses
+polling_active = True  # 设置一个while循环的标志
+while polling_active:
+    name = input("\nwhat is your name?\n")
+    response = input("which mountain would you like to climb today?\n")
+    responses[name] = response  # 将回答存储于字典中
+    repeat = input("would you like to let another person respond?(yes/no)\n")
+    if repeat == 'no':
+        polling_active = False
+print("\n--poll results--")
+print(responses)  # 顺便打印一下字典
+for name,response in responses.items():
+    print(f"{name} would like to climb {response}")
+"""
+"""
+sandwich_orders = ['1','2','3','4']
+finished_sandwiches = []
+while sandwich_orders:
+    finished_sandwiche = sandwich_orders.pop()
+    finished_sandwiches.append(finished_sandwiche)
+    print(f"i made your {finished_sandwiche}")
+"""
+"""
+print("店里的五香烟熏牛肉卖完了")
+sandwich_orders = ['1','2','3','pastrami','pastrami','pastrami']
+while 'pastrami' in sandwich_orders:
+    sandwich_orders.remove('pastrami')
+print(sandwich_orders)
+"""
+"""
+shengdi = {}
+active = True
+while active:
+    name = input("\nwhat is your name?\n")
+    place = input("\nwhere would you want to visit?\n")
+    shengdi[name] = place
+    respeat = input("would you like to let another person respond?(yes/no)\n")
+    if respeat == 'no':
+        break
+print("\n--poll results--")
+for name, place in shengdi.items():
+    print(f"{name} want to {place}")
+"""
+
+# 第八章 函数
+# 定义函数
+'''
+def greet_user():  # 在python中，创建函数使用关键字def，创建函数的格式为：def 函数名(完成任务所需要的信息):
+    """显示简单的问候语"""
+    print("hello!")  # 指出函数所需要进行的工作
 
 
+greet_user()
+'''
+# 向函数传递信息
+"""
+def greet_user(username):  # 当调用函数时，需要赋值给username  其中，”uesrname“为形参，即函数完成工作所需要的信息
+    print(f"hello!{username.title()}")
 
 
+greet_user('jesse')  # “jesse”为实参，即调用函数时传递给函数的信息  在调用函数时，应将形参置于圆括号中
+"""
+"""
+def display_message():
+    print(f"这一章学习函数的相关知识")
 
 
+display_message()
+"""
+"""
+def favorite_book(title):
+    print(f"one of my favorite book is {title.lower()}")
 
 
+favorite_book('alice in wonderland')
+"""
+# 位置实参
+"""
+def describe_pet(animal_type, pet_name): 
+    print(f"\ni have a {animal_type}")
+    print(f"\n my {animal_type} name is {pet_name}")
+# 在调用语句describe_pet('she','wyj')中，‘she’被赋值给‘animal_type’,'wyj'被赋值给'pet_name'
+                                    # 函数调用时，实参的顺序应与函数定义中的形参的顺序一致
+
+describe_pet('she', 'wyj')
+"""
+# 多次调用函数
+"""
+def describe_pet(animal_type, pet_name):
+    print(f"\ni have a {animal_type}")
+    print(f"\n my {animal_type} name is {pet_name}")
 
 
+describe_pet('she', 'wyj')
+describe_pet('dog', 'dillie')
+"""
+# 关键字实参  使用关键字实参时，可以不考虑函数调用中实参的顺序.  当使用关键字形参时，应准确指定函数定义中的形参名
+"""
+def describe_pet(animal_type, pet_name):
+    print(f"\ni have a {animal_type}")
+    print(f"my {animal_type} name is {pet_name}")
 
 
+describe_pet(                 # 此处语句等效于：describe_pet(
+    animal_type='hamster',                      pet_name='harry',
+    pet_name='harry'                            animal_type='hamster'
+)                                            ) 即为关键字实参是顺序无关紧要
+"""
+# 默认值  可以给形参指定默认值，如果在函数调用的过程中没有实参输入，则使用形参的默认值
+"""
+def describe_pet(pet_name, animal_type='dog'):
+    print(f"\ni have a {animal_type}")
+    print(f"\nmy {animal_type} name is {pet_name}")
 
+
+describe_pet('she')  # 此处语句可以等价为：describe_pet(pet_name='she')
+"""
+# 有默认值的形参被赋予实参时的示例
+"""
+def describe_pet(pet_name, animal_type='dog'):
+    print(f"\ni have a {animal_type}")
+    print(f"\nmy {animal_type} name is {pet_name}")
+
+
+describe_pet('she','little dog')  # 当函数调用时，有默认值的形参被赋予了实参，运行结果将表示实参而不是默认值
+"""
+
+# 避免实参错误
+# 实参错误内容：Traceback(most recent call last)
+"""
+def make_shirt(chima, ziyang):  # 关键字实参调用函数
+    print(f"这件{chima}大的T恤是印有{ziyang}的字样")
+
+
+make_shirt(
+    chima='175',
+    ziyang='我爱你'
+)
+"""
+"""
+def make_shirt(chima, ziyang):  # 位置实参调用函数
+    print(f"这件{chima}大的T恤是印有{ziyang}的字样")
+
+
+make_shirt('175','我爱你')
+"""
+"""
+def make_shirt(chima, ziyang='i love python'):
+    print(f"这件{chima}大的T恤印有{ziyang}的字样")
+
+
+make_shirt('175')  # 印有默认字样的大号T恤
+make_shirt('165')  # 印有默认字样的中号T恤
+make_shirt('155','我爱你')  # 印有‘我爱你’字样的小号T恤
+"""
+
+"""
+def descrbie_city(chengshi, guojia='中国'):
+    print(f"{chengshi} is in {guojia}")
+
+
+descrbie_city('beijing')
+descrbie_city('niuyue')
+descrbie_city('hengshui')
+"""
+
+# 返回值  函数返回的值为返回值，可使用return语句将值返回调用函数的代码行
+# 返回简单值
+"""
+def get_formatted_name(first_name, last_name):
+    full_name = f"{first_name} {last_name}"
+    return full_name.title()  # 将内容按要求转换，并将结果返回到函数调用行 
+
+
+musician = get_formatted_name('jimi', 'hendrix')  # 需要提供一个变量以便将返回值的值赋给变量
+print(musician)
+"""
+
+
+# 让实参变为可选项
+"""
+def get_formatted_name(first_name, middle_name, last_name):
+    full_name = f"{first_name} {middle_name} {last_name}"
+    return full_name.title()
+
+
+musician = get_formatted_name('john', 'lee', 'hooker')
+print(musician)
+"""
+"""
+def get_formatted_name(first_name, last_name, middle_name=''):  # 默认形参应在非默认形参之后
+    full_name = f"{first_name} {middle_name} {last_name}"
+    return full_name.title()
+
+
+musician = get_formatted_name('john',  'hooker')
+print(musician)
+"""
 
