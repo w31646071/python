@@ -1293,7 +1293,6 @@ musician = get_formatted_name('jimi', 'hendrix')  # 需要提供一个变量以�
 print(musician)
 """
 
-
 # 让实参变为可选项
 """
 def get_formatted_name(first_name, middle_name, last_name):
@@ -1312,5 +1311,276 @@ def get_formatted_name(first_name, last_name, middle_name=''):  # 默认形参�
 
 musician = get_formatted_name('john',  'hooker')
 print(musician)
+"""
+
+# 返回字典
+"""
+def build_person(first_name, last_name):
+    person = {
+        'first': first_name,
+        'last': last_name,
+    }
+    return person
+
+
+musician = build_person('jimi', 'hendrix')
+print(musician)
+"""
+"""
+def build_person(first_name, last_name,age=None):
+    person = {
+        'first': first_name,
+        'last': last_name,
+    }
+    if age:
+    person['age'] = age
+    return person
+
+
+musician = build_person('jimi', 'hendrix',age=27)
+print(musician)
+"""
+
+# 结合使用函数和while循环
+"""
+def get_formatted_name(first_name, last_name,medium=''):
+    full_name = f"{first_name} {last_name} {medium}"
+    return full_name.title()
+
+
+while True:
+    print(f"\nplease tell me your name:")
+    print("(enter 'q' at any time to quit)")
+    f_name = input("First name:")
+    if f_name == 'q':
+        break
+    m_name = input("Medium name:")
+    if m_name == 'q':
+        break
+    l_name = input("Last name:")
+    if l_name == 'q':
+        break
+    formatted_name = get_formatted_name(f_name,m_name,l_name)
+    print(formatted_name)
+"""
+
+"""
+def city_country(city, country):
+    ims = f"{city} {country}"
+    return ims.title()
+
+
+print(city_country('santiago', 'chile'))
+print(city_country('hengshui', 'china'))
+print(city_country('shijiang', 'china'))
+"""
+"""
+def make_album(singers,songs,num=None):
+    album = {
+        'singer':singers,
+        'song':songs,
+    }
+    if num:
+        album['num'] = num
+    return album
+
+
+ims = make_album('zjl','daoxiang',6)
+print(ims)
+ims = make_album('cyz','shinian',6)
+print(ims)
+ims = make_album('wyj','7777',6)
+print(ims)
+"""
+"""
+def make_album(singers,songs,num=None):
+    album = {
+        'singer':singers,
+        'song':songs,
+    }
+    if num:
+        album['num'] = num
+    return album
+
+
+active = True
+while active:
+    singer = input()
+    if singer == 'q':
+        break
+    song = input()
+    if song == 'q':
+        break
+    yn = input()
+    if yn == 'no':
+        active = False
+    ims = make_album(singer,song)
+    print(ims)
+"""
+
+# 传递列表:在函数调用的过程中，列表名可以作为实参调用，此时，函数可以直接访问列表中的内容
+"""
+def greet_users(names):
+    for name in names:
+        msg = f"hello,{name.title()}!"
+        print(msg)
+
+
+names = ['hannah', 'ty', 'margot']
+greet_users(names)  
+"""
+# 在函数中修改列表
+"""
+def print_models(unprinted_designs,completed_modesls):
+    while unprinted_designs:
+        current_design = unprinted_designs.pop()
+        print(f"printing models:{current_design}")
+        completed_modesls.append(current_design)
+def show_completed_models(completed_models):
+    print("\nthe following models have been printed:")
+    for completed_model in completed_models:
+        print(completed_model)
+
+
+unprinted_designs = ['phone case','robot pendant','dodecahedron']
+completed_models = []
+print_models(unprinted_designs,completed_models)
+show_completed_models(completed_models)
+"""
+
+# 禁止函数修改列表
+"""
+def print_models(unprinted_designs, completed_modesls):
+    while unprinted_designs:
+        current_design = unprinted_designs.pop()
+        print(f"printing models:{current_design}")
+        completed_modesls.append(current_design)
+
+
+def show_completed_models(completed_models):
+    print("\nthe following models have been printed:")
+    for completed_model in completed_models:
+        print(completed_model)
+
+
+unprinted_designs = ['phone case', 'robot pendant', 'dodecahedron']
+completed_models = []
+print_models(unprinted_designs[:], completed_models)
+show_completed_models(completed_models)
+print(unprinted_designs)
+print(completed_models)
+"""
+
+"""
+def show_messages(news):
+    for new in news:
+        print(new)
+
+
+img = ['1', '2', '3']
+show_messages(img)
+"""
+"""
+def send_messages(show_messages,sent_messages):
+    while show_messages:
+        message = show_messages.pop()
+        sent_messages.append(message)
+
+
+show_messages = ['1','2','3']
+sent_messages = []
+send_messages(show_messages,sent_messages)
+print(show_messages)
+print(sent_messages)
+"""
+"""
+def send_messages(show_messages,sent_messages):
+    while show_messages:
+        message = show_messages.pop()
+        sent_messages.append(message)
+
+
+show_messages = ['1','2','3']
+sent_messages = []
+send_messages(show_messages[:],sent_messages)
+print(show_messages)
+print(sent_messages)
+"""
+
+# 传递任意数量的形参  *形参名:创建一个”形参名“的空元组，并将收到的所有值都封装到这个元组中
+"""
+def make_pizza(*toppings):
+    print(toppings)
+
+
+make_pizza('pepperoni')
+make_pizza('mushrooms', 'green peppers', 'extra cheese')
+"""
+"""
+def make_pizza(*toppings):
+    print(f"\nmaking a pizza with the following toppings:")
+    for topping in toppings:
+        print(f"-{toppings}")
+
+
+make_pizza('pepperoni')
+make_pizza('mushrooms', 'green peppers', 'extra cheese')
+"""
+# 结合使用位置实参和任意数量实参
+"""
+def make_pizza(size,*toppings):
+    print(f"\nmaking a {size}-pizza with the following toppings:")
+    for topping in toppings:
+        print(f"-{toppings}")
+
+
+make_pizza(16,'pepperoni')
+make_pizza(16,'mushrooms', 'green peppers', 'extra cheese')
+"""
+
+# 使用任意数量的关键字实参
+"""
+def build_profile(first, last, **user_info):  # **形参名:创建一个以”形参名“为名的字典
+    user_info['first'] = first
+    user_info['last'] = last
+    return user_info
+
+
+user_profile = build_profile('albert', 'einstein', location='princeton', field='physics')
+print(user_profile)
+"""
+"""
+def sanmingzhi(*shicais):
+    for shicai in shicais:
+        print(f"{shicai}")
+
+
+sanmingzhi('1')
+sanmingzhi('1','2')
+sanmingzhi('1','2','3')
+sanmingzhi('1','2','3','4')
+"""
+
+"""
+def build_profile(first, medium, last, **user_info):
+    user_info['first'] = first
+    user_info['medium'] = medium
+    user_info['last'] = last
+    return user_info
+
+
+user_profile = build_profile('wang', 'yu', 'jia', location='qinhuangdao', field='physics')
+print(user_profile)
+"""
+
+"""
+def build(zhizhaoshang, xinghao, **qita):
+    qita['zhizhaoshang'] = zhizhaoshang
+    qita['xinghao'] = xinghao
+    return qita
+
+
+xinxi = build('audi', 'RS7', color='blick', tow_package=True)
+print(xinxi)
 """
 
