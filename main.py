@@ -1583,4 +1583,591 @@ def build(zhizhaoshang, xinghao, **qita):
 xinxi = build('audi', 'RS7', color='blick', tow_package=True)
 print(xinxi)
 """
+# 将函数存储在模块中
+# 将函数存储在称为”模块“的独立文件中，再使用“import”语句将模块导入到主程序中
+# 导入整个模块
+"""
+import mokuai  # 在此处，import语句导入了外部创建的pizza模块文件中的make_pizza()函数
 
+mokuai.make_pizza(16,'pepperoni')  # 调用模块中函数的语句:module_name.function_name()
+mokuai.make_pizza(16,'mushrooms','green peppers','extra cheese')
+"""
+# 导入特定的函数:from module_name import function_name//可根据需要从模块中导入任意数量的函数
+"""
+from mokuai import make_pizza
+
+make_pizza(16,'pepperoni')
+make_pizza(16,'mushrooms','green peppers','extra cheese')
+"""
+# 当导入的函数名过长或与程序中现有的名称冲突时，可以使用“as”指定简短的别名:from module_name import function_name as fn
+"""
+mp(16,'pepperoni')
+mp(16,'mushrooms','green peppers','extra cheese')
+"""
+# 同时，”as”也可以给模块指定别名:import module_name as mn
+"""
+import mokuai as m
+
+m.make_pizza(16, 'pepperoni')
+m.make_pizza(16, 'mushrooms', 'green peppers', 'extra cheese')
+"""
+# 导入模块中所有函数:from module_name import * ‘*’ 可以导入模块中所有函数
+"""
+from mokuai import *
+make_pizza(16,'pepperoni')
+make_pizza(12,'mushrooms','green peppers','extra cheese')
+"""
+"""
+from mokuai import print_models as pm
+unprinted_models = ['phone case','robot pendant','dodecahedron']
+completed_models = []
+pm(unprinted_models,completed_models)
+print(unprinted_models)
+print(completed_models)
+"""
+
+# 第九章 类
+# 类的使用方法:
+# 对类进行实例化:实例名 = 类名
+# 使用类中的值:实例名.属性
+# 使用类中的函数:实例名.方法名(参数列表)
+# 创建和使用类
+'''
+class dog:  # 定义了一个名为dog的类  定义类的格式:class 类名
+    """--一次模拟小狗的简单尝试--"""  # 描述这个类的功能
+
+    def __init__(self, name, age):
+        # 类中的函数成为方法。即方法本质也是一种函数
+        # 在方法中，形参self必不可少且位于其他形参前面
+        # 在调用这个方法创建实例时，每个与实例相关联的方法调用都自动传递实参self
+        # self是一个指向实例本身的引用，让实例能够访问类中的属性和方法
+        """--初始化属性name和age--"""
+        self.name = name
+        self.age = age
+        # 以self为前缀的变量可供类中所有的方法使用，可以通过类的任何实例访问
+
+    def sit(self):
+        """模拟小狗收到命令时蹲下"""
+        print(f"{self.name} is now sitting")
+
+    def roll_over(self):
+        """模拟小狗收到命令时打滚"""
+        print(f"{self.name} rolled over")
+'''
+
+# 根据类创建实例
+'''
+class dog:
+    """--一次模拟小狗的简单尝试--"""
+
+    def __init__(self, name, age):
+        """--初始化属性name和age--"""
+        self.name = name
+        self.age = age
+
+    def sit(self):
+        """模拟小狗收到命令时蹲下"""
+        print(f"{self.name} is now sitting")
+
+    def roll_over(self):
+        """模拟小狗收到命令时打滚"""
+        print(f"{self.name} rolled over")
+
+
+my_dog = dog('willie', 6)  # 此处语句访问了类dog中的属性
+your_dog = dog('lucy',3)  # 此处语句创建了第二个实例your_dog，同时也访问了类dog中属性
+my_dog.sit()
+my_dog.roll_over()
+# 此处语句调用了类dog中的方法
+# 调用方法需要指定实例的名称和要调用的方法，并用'.'间隔
+your_dog.sit()
+your_dog.roll_over()
+# 创建的第二个实例调用了类dog中的方法
+print(f"my dog name is {my_dog.name}")
+print(f"my dog is {my_dog.age} years old")
+print(f"your dog name is {your_dog.name}")
+print(f"your dog is {your_dog.age} years old")
+'''
+
+"""
+class Restaurant:
+    def __init__(self, restaurant_name, cuisine_type):
+        self.restaurant_name = restaurant_name
+        self.cuisine_type = cuisine_type
+
+    def describe_restaurant(self):
+        print(f"{self.restaurant_name} {self.cuisine_type}")
+
+    def open_restaurant(self):
+        print(f"{self.restaurant_name} is opening")
+
+
+restaurant = Restaurant('wyj', '111')
+print(f"{restaurant.restaurant_name} {restaurant.cuisine_type}")
+restaurant.describe_restaurant()
+restaurant.open_restaurant()
+restaurant = Restaurant('ddd','222')
+restaurant.describe_restaurant()
+restaurant = Restaurant('zzz','333')
+restaurant.describe_restaurant()
+restaurant = Restaurant('aaa','444')
+restaurant.describe_restaurant()
+"""
+
+"""
+class User:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    def describe_user(self):
+        print(f"{self.first_name} {self.last_name}")
+
+    def greet_user(self):
+        print(f"mr/miss.{self.first_name}，how are you")
+
+
+user = User('wang', 'yujia')
+user.describe_user()
+user.greet_user()
+user = User('ddd', 'www')
+user.describe_user()
+user.greet_user()
+user = User('www','aaa')
+user.describe_user()
+user.greet_user()
+"""
+
+# 使用类和实例
+# 由于修改属性的值注释符太多，迫不得已开一个新的文件存放这一次的实例
+'''
+class Restaurant:
+    def __init__(self, restaurant_name, cuisine_type):
+        self.restaurant_name = restaurant_name
+        self.cuisine_type = cuisine_type
+        self.number_served = 0
+
+    def describe_restaurant(self):
+        print(f"{self.restaurant_name} {self.cuisine_type}")
+
+    def open_restaurant(self):
+        print(f"{self.restaurant_name} is opening")
+
+    def read_served(self):
+        print(f"有{self.number_served}人在这里就餐")
+
+    def set_number_server(self, number):
+        self.number_served = number
+
+    def increment_number_server(self, number):
+        self.number_served += number
+
+
+restaurant = Restaurant('www', 'ddd')
+restaurant.describe_restaurant()
+restaurant.open_restaurant()
+"""restaurant.number_served = 23
+restaurant.read_served()
+restaurant.set_number_server(23)
+restaurant.read_served()"""
+restaurant.increment_number_server(23)
+restaurant.read_served()
+'''
+
+"""
+class User:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.login_attempts = 0
+
+    def describe_user(self):
+        print(f"{self.first_name} {self.last_name}")
+
+    def greet_user(self):
+        print(f"mr/miss.{self.first_name}，how are you")
+
+    def increment_login_attempts(self, number):
+        self.login_attempts = number + 1
+        print(f"={self.login_attempts}")
+
+    def reset_login_attempts(self):
+        self.login_attempts = 0
+        print(f'={self.login_attempts}')
+
+
+user = User('wang', 'yujia')
+user.increment_login_attempts(0)
+user.reset_login_attempts()
+"""
+
+# 继承  在继承中，当一个类继承另一个类时，被继承的类为父类，继承的类为子类，子类继承了父类所有的属性和方法，同时还可以定义自己的属性和方法
+# 在子类中，属性和方法应为子类内容特有的内容
+# 子类的方法__init__()
+"""
+class Car:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+        self.odometer_reading = 0
+
+    def get_descriptive_name(self):
+        long_name = f"{self.year} {self.make} {self.model}"
+        return long_name.title()
+
+    def read_odometer(self):
+        print(f"this car has {self.odometer_reading} mile on it")
+
+    def update_odometer(self, mileage):
+        if mileage >= self.odometer_reading:
+            self.odometer_reading = mileage
+        else:
+            print("you can not roll back an odometer!")
+
+    def increment_odometer(self, miles):
+        self.odometer_reading += miles
+
+# 创建子类时，父类必须包含在当前的文件夹中，同时要位于子类前面
+class ElectricCar(Car):  # 定义子类时应在圆括号‘()’中指定父类的名称
+    def __init__(self, make, model, year):
+        super().__init__(make, model, year)  # super()函数:可以调用父类中的方法__init__()
+
+
+my_tesla = ElectricCar('tesla', 'model s', '2019')
+print(my_tesla.get_descriptive_name())
+"""
+
+# 给子类定义
+"""
+class Car:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+        self.odometer_reading = 0
+
+    def get_descriptive_name(self):
+        long_name = f"{self.year} {self.make} {self.model}"
+        return long_name.title()
+
+    def read_odometer(self):
+        print(f"this car has {self.odometer_reading} mile on it")
+
+    def update_odometer(self, mileage):
+        if mileage >= self.odometer_reading:
+            self.odometer_reading = mileage
+        else:
+            print("you can not roll back an odometer!")
+
+    def increment_odometer(self, miles):
+        self.odometer_reading += miles
+
+
+class ElectricCar(Car):
+    def __init__(self, make, model, year):
+        super().__init__(make, model, year)
+        self.battery_size = 75
+
+    def describe_battery(self):
+        print(f"this car has a {self.battery_size}-kwh battery")
+
+
+my_tesla = ElectricCar('tesla', 'model s', '2019')
+print(my_tesla.get_descriptive_name())
+my_tesla.describe_battery()
+"""
+# 重写父类的方法
+"""
+class Car:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+        self.odometer_reading = 0
+
+    def get_descriptive_name(self):
+        long_name = f"{self.year} {self.make} {self.model}"
+        return long_name.title()
+
+    def read_odometer(self):
+        print(f"this car has {self.odometer_reading} mile on it")
+
+    def update_odometer(self, mileage):
+        if mileage >= self.odometer_reading:
+            self.odometer_reading = mileage
+        else:
+            print("you can not roll back an odometer!")
+
+    def increment_odometer(self, miles):
+        self.odometer_reading += miles
+
+
+class ElectricCar(Car):
+    def __init__(self, make, model, year):
+        super().__init__(make, model, year)
+        self.battery_size = 75
+
+    def describe_battery(self):
+        print(f"this car has a {self.battery_size}-kwh battery")
+
+    def fill_gas_tank(self):
+        print("this car does not need a gas tank!")
+
+
+my_tesla = ElectricCar('tesla', 'model s', '2019')
+print(my_tesla.get_descriptive_name())
+my_tesla.describe_battery()
+my_tesla.fill_gas_tank()
+"""
+
+# 将实例用作属性
+"""
+class Car:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+        self.odometer_reading = 0
+
+    def get_descriptive_name(self):
+        long_name = f"{self.year} {self.make} {self.model}"
+        return long_name.title()
+
+    def read_odometer(self):
+        print(f"this car has {self.odometer_reading} mile on it")
+
+    def update_odometer(self, mileage):
+        if mileage >= self.odometer_reading:
+            self.odometer_reading = mileage
+        else:
+            print("you can not roll back an odometer!")
+
+    def increment_odometer(self, miles):
+        self.odometer_reading += miles
+
+
+class Battery:  # 定义了一个新类Battery
+    def __init__(self, battery_size=75):
+        self.battery_size = battery_size
+
+    def describe_battery(self):
+        print(f"this car has a {self.battery_size}-kwh battery")
+
+    def get_range(self):
+        if self.battery_size == '75':
+            range = 260
+        elif self.battery_size == '100':
+            range = 315
+
+    print(f"this car can go about {range} miles on a full charge")
+
+
+class ElectricCar(Car):
+    def __init__(self, make, model, year):
+        super().__init__(make, model, year)
+        self.battery = Battery()
+
+
+my_tesla = ElectricCar('tesla', 'model s', '2019')
+print(my_tesla.get_descriptive_name())
+my_tesla.battery.describe_battery()
+my_tesla.battery.get_range()
+"""
+
+# 模拟实物
+"""
+class Restaurant:
+    def __init__(self, restaurant_name, cuisine_type):
+        self.restaurant_name = restaurant_name
+        self.cuisine_type = cuisine_type
+        self.number_served = 0
+
+    def describe_restaurant(self):
+        print(f"{self.restaurant_name} {self.cuisine_type}")
+
+    def open_restaurant(self):
+        print(f"{self.restaurant_name} 正在营业")
+
+    def read_served(self):
+        print(f"有{self.number_served}人在这里就餐")
+
+    def set_number_server(self, number):
+        self.number_served = number
+
+    def increment_number_server(self, number):
+        self.number_served += number
+
+
+class IceCreamStand(Restaurant):
+    def __init__(self, restaurant_name, cuisine_type):
+        super().__init__(restaurant_name, cuisine_type)
+        self.flavors = ['草莓味', '苹果味', '原味奶油']
+
+    def describe_icecream(self):
+        print(f"本店有三种冰激凌:")
+        for flavor in self.flavors:
+            print(flavor)
+
+
+IceCreamStand = IceCreamStand('www', 'ddd')
+IceCreamStand.describe_icecream()
+"""
+
+"""
+class User:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.login_attempts = 0
+
+    def describe_user(self):
+        print(f"{self.first_name} {self.last_name}")
+
+    def greet_user(self):
+        print(f"mr/miss.{self.first_name}，how are you")
+
+    def increment_login_attempts(self, number):
+        self.login_attempts = number + 1
+        print(f"={self.login_attempts}")
+
+    def reset_login_attempts(self):
+        self.login_attempts = 0
+        print(f'={self.login_attempts}')
+
+
+class Admin(User):
+    def __init__(self, first_name, last_name):
+        super().__init__(first_name, last_name)
+        self.privileges = ['can add post', 'can delete post', 'can ban user']
+
+    def show_privileges(self):
+        for privilege in self.privileges:
+            print(f"管理员有{privilege}权限")
+
+
+Ad = Admin('www', 'sss')
+Ad.show_privileges()
+"""
+
+"""
+class User:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.login_attempts = 0
+
+    def describe_user(self):
+        print(f"{self.first_name} {self.last_name}")
+
+    def greet_user(self):
+        print(f"mr/miss.{self.first_name}，how are you")
+
+    def increment_login_attempts(self, number):
+        self.login_attempts = number + 1
+        print(f"={self.login_attempts}")
+
+    def reset_login_attempts(self):
+        self.login_attempts = 0
+        print(f'={self.login_attempts}')
+
+
+class Privileges:
+    def __init__(self, privileges=[]):
+        self.privileges = ['can add post', 'can delete post', 'can ban user']
+
+    def show_privileges(self):
+        for privilege in self.privileges:
+            print(f"管理员有{privilege}权限")
+
+
+class Admin(User):
+    def __init__(self, first_name, last_name):
+        super().__init__(first_name, last_name)
+        self.privileges = Privileges()
+
+
+vip_user = Admin('www', 'zzz')
+vip_user.privileges.show_privileges()
+"""
+
+"""
+class Car:
+    def __init__(self, make, model, year):
+        
+        self.make = make
+        self.model = model
+        self.year = year
+        self.odometer_reading = 0
+        self.miles = 0
+
+    def get_desprective_name(self):
+        
+        long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+        return long_name.title()
+
+    def read_odometer(self):
+        
+        print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+    def update_odometer(self, mileage):
+        
+        if mileage >= self.odometer_reading:
+            self.odometer_reading = mileage
+        # 将里程值存储在odometer_reading中
+        else:
+            print("You can't roll back an odometer!")
+
+    def increment_odometer(self, miles):
+       
+        if miles >= self.miles:
+            self.odometer_reading += miles
+        else:
+            print("You can't add the miles which is negative number!")
+
+    def fill_gas_tank(self):
+        print("This car have a  gas tank")
+
+
+class Battery:
+
+    def __init__(self, battery_size=70):
+
+        self.battery_size = battery_size
+
+    def describe_battery(self):
+
+        print("This car has a " + str(self.battery_size) + "-kwh battery.")
+
+    def get_range(self):
+
+        if self.battery_size == 70:
+            range = 240
+        elif self.battery_size == 85:
+            range = 270
+        message = "This car can go approximately " + str(range)
+        message += " miles on a full charge."
+        print(message)
+
+    def upgrade_battery(self):
+        if self.battery_size != 85:
+            self.battery_size = 85
+
+
+class ElectricCar(Car):
+    def __init__(self, make, model, age):
+        super(ElectricCar, self).__init__(make, model, age)
+        self.battery = Battery()
+
+    def fill_gas_tank(self):
+        print("This car doesn't have a gas tank!")
+
+
+my_elsctic = ElectricCar('tesla', 'model s', '2016')
+print(my_elsctic.get_desprective_name())
+my_elsctic.battery.describe_battery()
+my_elsctic.battery.get_range()
+my_elsctic.battery.upgrade_battery()
+my_elsctic.battery.get_range()
+my_elsctic.fill_gas_tank()
+"""
