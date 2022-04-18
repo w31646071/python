@@ -2192,3 +2192,27 @@ print（my_tesla.get_descriptive_name())
 """
 # 导入模块中所有的类:from module_name import *
 # 在一个模块中导入另一个模块
+# 自定义工作流程
+"""
+from restaurant import Restaurant
+
+# 创建一个实例
+my_restaurant = Restaurant('Go Believe', 'steamed stuffed bun')
+# 打印多少人就餐过
+print(my_restaurant.number_served)
+"""
+"""
+from user import User, Privileges, Admin
+
+first_admin = Admin('Ac', 'Fun', 22, 'female')
+first_admin.privileges.show_privileges()
+
+"""
+"""
+from user import User
+from privileges import Privileges, Admin
+
+first_admin = Admin('Ac', 'Fun', 22, 'female')
+first_admin.privileges.show_privileges()
+
+"""
