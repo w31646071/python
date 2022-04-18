@@ -1589,8 +1589,8 @@ print(xinxi)
 """
 import mokuai  # 在此处，import语句导入了外部创建的pizza模块文件中的make_pizza()函数
 
-mokuai.make_pizza(16,'pepperoni')  # 调用模块中函数的语句:module_name.function_name()
-mokuai.make_pizza(16,'mushrooms','green peppers','extra cheese')
+mokuai.make_pizza(16, 'pepperoni')  # 调用模块中函数的语句:module_name.function_name()
+mokuai.make_pizza(16, 'mushrooms', 'green peppers', 'extra cheese')
 """
 # 导入特定的函数:from module_name import function_name//可根据需要从模块中导入任意数量的函数
 """
@@ -2152,22 +2152,43 @@ class Battery:
     def upgrade_battery(self):
         if self.battery_size != 85:
             self.battery_size = 85
-
-
-class ElectricCar(Car):
-    def __init__(self, make, model, age):
-        super(ElectricCar, self).__init__(make, model, age)
-        self.battery = Battery()
-
-    def fill_gas_tank(self):
-        print("This car doesn't have a gas tank!")
-
-
-my_elsctic = ElectricCar('tesla', 'model s', '2016')
-print(my_elsctic.get_desprective_name())
-my_elsctic.battery.describe_battery()
-my_elsctic.battery.get_range()
-my_elsctic.battery.upgrade_battery()
-my_elsctic.battery.get_range()
-my_elsctic.fill_gas_tank()
 """
+# 导入类
+# 导入单个类  在同一个文件夹中创建了一个Car.py，其内容为定义一个类，类名为Car
+"""
+form car import Car
+
+my_car_ = Car('audi','a4','2019')
+print(my_new_Car.get_descriptive_name())
+
+my_new_car.odometer.reading = 23
+my_new_car.read.odometer()
+"""
+# 在一个模块中存储多个类
+"""
+from car import ElectricCar
+my_tesla = ElectricCar('tesla','model s','2019')
+
+print(my_tesla.get_desriptive_name())
+my_tesla.battery.describe_battery()
+my_tesla.battery.get.range()
+"""
+# 从一个模块中导入多个类
+"""
+from car import Car,ElectricCar
+
+my_beetle = Car('volkswagen','beetle',2019)
+print(my_beetle.get_descriptive_name())
+
+my_tesla = ElectricCar('tesla','roadster','2019)
+print(my_tesla.get_Descriptive_name())
+"""
+# 导入整个模块
+"""
+import car
+
+my_tesla = car.ElectricCar('tesla','roadster',2019)
+print（my_tesla.get_descriptive_name())
+"""
+# 导入模块中所有的类:from module_name import *
+# 在一个模块中导入另一个模块
