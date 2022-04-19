@@ -2216,3 +2216,476 @@ first_admin = Admin('Ac', 'Fun', 22, 'female')
 first_admin.privileges.show_privileges()
 
 """
+# python标准库
+# random标准库
+"""
+from random import randint
+ims = randint(1,6)  # randint(a,b):生成一个位于a与b之间的随机数
+print(ims)
+"""
+"""
+from random import choice  # choice():将一个列表或者元组作为参数，随机返回其中一个元素
+players = ['charles','martina','michael','florence','eli']
+first_up = choice(players)
+print(first_up)
+"""
+"""
+from random import randint
+
+class Die:
+    def __init__(self, sides=6):
+        self.sides = sides
+
+    def roll_die(self):
+
+        active = True
+        i = 1
+        while active:
+            i = i + 1
+            if i >= 12:
+                break
+            else:
+                self.sides = randint(1, 6)
+                print(self.sides)
+
+
+shuzi = Die()
+shuzi.roll_die()
+"""
+"""
+from random import choice
+
+lists = ('1','2','3','4','5','6','7','8','9','0','a','b','c','d','e')
+first = choice(lists)
+second = choice(lists)
+third = choice(lists)
+fourth = choice(lists)
+print(f"{first}{second}{third}{fourth}为大奖")
+"""
+"""
+from random import choices
+def get_win_ticket(possibilities):
+    # 摇出中奖组合
+    win_ticket = []
+    while len(win_ticket) < 7:
+        pulled_item = choices(possibilities)
+        # 仅当摇出的数字不在组合中时才将其添加到组合中
+        if pulled_item not in win_ticket:
+            win_ticket.append(pulled_item)
+    return win_ticket
+
+
+def check_ticket(played_ticket, win_ticket):
+    # 检查彩票的每个数字或字母，只要有一个不在中奖组合中就返回False
+    for element in played_ticket:
+        if element not in win_ticket:
+            return False
+    return True
+
+
+def make_ticket(possibilities):
+    # 随机生成彩票
+    ticket = []
+    while len(ticket) < 7:
+        pulled_item = choices(possibilities)
+        if pulled_item not in ticket:
+            ticket.append(pulled_item)
+    return ticket
+
+
+possibilities = ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+                 'a', 'b', 'c', 'd', 'e','f','g','h','i','j','k','l',
+                 'm','n','o','p','q','r','s','t','u','v','w','x','y','z')
+win_ticket = get_win_ticket(possibilities)
+plays = 0
+won = False
+max_tires = 1000000
+while not won:
+    new_ticket = make_ticket(possibilities)
+    won = check_ticket(new_ticket,win_ticket)
+    plays += 1
+    if plays >= max_tires:
+        break
+    if won:
+        print("We have a winning ticket!")
+        print(f"Your ticket: {new_ticket}")
+        print(f"Winning ticket: {win_ticket}")
+        print(f"It only took {plays} tries to win!")
+    else:
+        print(f"Tried {plays} times, without pulling a winner. :(")
+        print(f"Your ticket: {new_ticket}")
+        print(f"Winning ticket: {win_ticket}")
+"""
+# 类编码风格:应采用驼峰命名法
+# 第十章 文件和异常
+# 异常:用于管理程序运行时出现的错误
+# 从文件中读取数据
+# 读取整个文件
+# open():接受一个参数，即为要打开的文件的名称
+# 关键字with:在不再需要访问文件后将其关闭
+"""
+with open('pi_digits.txt') as file_object:  # open():接受一个参数，即为要打开的文件的名称
+ # 关键字with:在不再需要访问文件后将其关闭
+    contents = file_object.read()
+print(contents)
+ # 并没有使用open()和close()来打开和关闭文件，如果在程序中过早的调用close()，会导致在需要使用文件时而文件已经关闭(即无法访问)
+ # 即使在合适的时机调用close()，也有可能会因为程序存在bug而导致方法close()无法执行，文件将不会关闭
+"""
+"""
+with open('pi_digits.txt') as file_object:
+    contents = file_object.read()
+print(contents.rstrip())  # rstrip()删除了文件右边的空行
+                          # 同理，lstrip()删除文件左边的空行
+                          # strip()删除文件所有的空行
+"""
+# 文件路径
+# 当要打开的文件于程序所在文件不在一个文件夹中时，需要提供文件路径，到特定的位置去查找
+"""
+with open('text_files/filename.txt') as file_object:
+"""
+# 绝对文件路径:即文件的完整路径
+# 可以将绝对路径赋值给一个变量，再将该变量传递给open().可以简化open()语句
+"""
+file_path = '/home/ehmatthes/other_files/text_files/_filename_.txt'
+with open(file_path) as  file_object
+"""
+# 逐行读取
+"""
+filename = 'pi_digits.txt'
+with open(filename) as file_object:
+    for line in file_object:
+        print(line.strip())  # 逐行读取最后的print()括号内为‘line’
+"""
+# 创建一个包含文件各行内容的列表
+"""
+filename = 'pi_digits.txt'
+with open(filename) as file_object:
+    lines = file_object.readlines()  # 方法readlines():从文件中读取每一行，并将其存储在一个列表中
+
+for line in lines:
+    print(line.strip())
+"""
+"""
+filename = 'pi_digits.txt'
+with open(filename) as file_object:
+    lines = file_object.readlines()
+
+pi_string = ''  # 创建一个变量用于只想圆周率的值
+for line in lines:
+    pi_string += line.strip()
+# 使用一个循环，将隔行加入pi_string，并删除每行末尾的换行符
+print(pi_string)
+print(len(pi_string))
+# 挡在读取文本时，所有文本均为字符串
+# 当读取的为数且想作为数值使用，必须转化类型
+# int():整数型
+ # float():浮点数
+"""
+# 包含一百万位的大型文件
+"""
+filename = 'pi_million_digits.txt'
+with open(filename) as file_object:
+    lines = file_object.readlines()
+
+pi_string = ''
+for line in lines:
+    pi_string += line.strip()
+
+print(f"{pi_string[:52]}...")  # 此处利用了列表分片，只显示前52位,第53位及以后用省略号代替
+print(len(pi_string))
+"""
+# 圆周率中包含你的生日吗
+"""
+filename = 'pi_million_digits.txt'
+with open(filename) as file_object:
+    lines = file_object.readlines()
+
+pi_string = ''
+for line in lines:
+    pi_string += line.strip()
+birthday = input("enter your birthday,in the form mmddyy:")
+if birthday in pi_string:
+    print("your birthday appears in the first million digits of pi!")
+else:
+    print("your birthday does not appear in the first million digits of pi")
+"""
+"""
+with open('pythonbj.txt') as file_object:
+    contents = file_object.read()
+print(contents)  # 第一次打印，读取整个文件
+"""
+"""
+with open('pythonbj.txt') as file_object:
+    lines = file_object.readlines()
+    for line in lines:
+        print(line)  # 第二次打印，遍历文件中的对象
+"""
+"""
+filename = 'pythonbj.txt'
+
+with open(filename) as file_object:
+    lines = file_object.readlines()
+
+pi_string = ''
+for line in lines:
+    pi_string += line.strip()
+
+print(pi_string)  # 第三次打印，将各行存储在一个列表中，再在with代码块外面打印
+"""
+"""
+filename = "pythonbj.txt"
+
+with open(filename) as file_object:
+    lines = file_object.readlines()
+pi_string = ''
+for line in lines:
+    pi_string += line.strip()
+    message = pi_string.replace('python','c')  # 将文件中的python全部替换为c，并赋值给一个新的变量
+print(message)  # 打印新的变量
+"""
+# 写入文件
+# 写入空文件
+"""
+filename = 'programming.txt'
+with open(filename, 'w') as file_object:  # 在语句open()中，第二个实参'w'表示以写入模式打开文件
+                                          # 其他模式:‘r’:读取模式  ‘w’:写入模式  'a':附加模式  ‘r+’:读写模式
+                                          # 当省略模式实参时，以默认的只读形式打开文件
+                                          # 当以写入模式'w'打开文件时，如果指定的文件存在内容，则在返回文件对象前清空该文件的内容
+                                          # 在写入时，只能将字符串写入文本文件，要将数值数据存储到文本文件中，应先用函数str()将其转换成字符串格式
+    file_object.write('i love you')
+"""
+# 写入多行
+"""
+filename = 'programming.txt'
+with open(filename, 'w') as file_object:
+    file_object.write('i love you\n')  # 当使用写入模式'w'时，要让每个字符串都单独占一行，需要在方法调用write()中包含换行符
+    file_object.write('i love creating new games\n')
+"""
+# 附加到文件
+"""
+filename = 'programming.txt'
+with open(filename, 'a') as file_object:
+    file_object.write('i love you \n')
+    file_object.write('i love creating apps that can run in a browser.\n')
+"""
+"""
+filename = 'guest.txt'
+name = input('请输入你的名字:')
+with open(filename,'a') as file_object:
+    file_object.write(name)
+"""
+"""
+filename = 'guest_book.txt'
+active = True
+while active:
+    name = input("请输入你的名字:")
+    with open(filename, 'a') as file_object:
+        file_object.write(f"{name},你好\n")
+    if name == 'q':
+        break
+"""
+"""
+filename = 'yuanyin.txt'
+active = True
+while active:
+    name = input("请输入你的名字:")
+    reason = input("你为什么喜欢编程")
+    with open(filename,'a') as file_object:
+        file_object.write(f"{name}:{reason}\n")
+    if reason == 'q':
+        break
+"""
+# 异常:一个特殊对象，管理程序执行期间发生的错误
+# 异常模块: try-except
+# 处理ZeroDivisionError异常
+"""
+try:
+    print(5/0)
+except:
+    print("you can not divide by zero！")
+"""
+# 使用异常避免崩溃
+"""
+print("give me to numbers,and i will divide them.")
+print("enter 'q' to quit")
+active = True
+while active:
+    first_number = input("\nfirst number:")
+    if first_number == 'q':
+        break
+    second_number = input("\nsecond number:")
+    if second_number == 'q':
+        break
+    try:
+        answer = int(first_number) / int(second_number)
+    except ZeroDivisionError:
+        print("you can not divide by 0")
+    else:  # 依赖try代码块成功执行的代码都应该放到else中 
+           # 如果try模块中的代码成功运行，就使用else模块中的代码块 
+        print(answer)
+"""
+# try-except-else的工作原理:
+# 尝试执行try代码块中的代码，只有可能会引发异常的代码才需要放在try语句中
+# 一些仅在try代码块成功执行时才需要运行的代码放在else中执行
+# except代码块指出当出现异常时该怎么办
+# 处理FileNotFoundError异常(找不到文件）
+"""
+filename = 'alice.txt'
+try:
+    with open(filename, encoding='utf-8') as f:  # encoding='utf-8':给参数encoding指定了值，是在系统默认编码于要读取文件使用的编码不一致时必须的操作
+        contents = f.read()
+except FileNotFoundError:
+    print(f"sorry,the file {filename} does not exist")
+"""
+# 分析文本
+# 没有实例中所要的电子文本
+"""
+title = "Alice in Wonderland"
+ims = title.split() 
+print(ims)
+# 方法split():根据一个字符串创建一个单词列表,以空格为分隔符将字符串分拆成多个部分，并将这些部分存储到一个列表中
+"""
+"""
+filename = 'alice.txt'
+try:
+    with open(filename, 'encoding=utf-8') as f:
+        content = f.read()
+except:
+    print(f"sorry,the file {filename} does not exist")
+else:
+    words = content.split()
+    num_words = len(words)
+    print(f"the file {filename} has about {num_words} words")
+"""
+
+# 使用多个文件
+"""
+def count_words(filename):
+    try:
+        with open(filename, 'encoding=utf-8') as f:
+            contents = f.read()
+    except:
+        print(f"sorry,the file {filename} does not exist.")
+    else:
+        words = contents.split()
+        num_words = len(words)
+        print(f"the {filename} has about {num_words} words ")
+
+
+filename = 'programming.txt'
+count_words(filename)
+"""
+
+"""
+def count_words(filename):
+    try:
+        with open(filename, 'encoding=utf-8') as f:
+            contents = f.read()
+    except:
+        print(f"sorry,the file {filename} does not exist.")
+    else:
+        words = contents.split()
+        num_words = len(words)
+        print(f"the {filename} has about {num_words} words ")
+
+
+filenames = ['alice.txt', 'siddhartha.txt', 'moby_dick.txt', 'little_women.txt']
+for filename in filenames:
+    count_words(filename)
+# 没有这些电子文本，所以说全部跳转到异常处理except语句
+"""
+
+# 静默失败
+"""
+def count_words(filename):
+    try:
+        with open(filename, 'encoding=utf-8') as f:
+            contents = f.read()
+    except:
+        pass  # pass:在代码块中什么都不要做
+    else:
+        words = contents.split()
+        num_words = len(words)
+        print(f"the file {filename} has about {num_words} words")
+
+
+filenames = ['alice.txt', 'siddhartha.txt', 'moby_dick.txt', 'little_women.txt']
+for filename in filenames:
+    count_words(filename)
+"""
+
+# 决定报告哪些错误
+"""
+first_num = input("请输入第一个数:")
+second_num = input("请输入第二个数：")
+try:
+    p_num = int(first_num) + int(second_num)
+except:
+    print("请确保输入的数字喔")
+else:
+    print(p_num)
+"""
+
+"""
+active = True
+while active:
+    first_num = input("请输入第一个数:")
+    second_num = input("请输入第二个数：")
+    try:
+        p_num = int(first_num) + int(second_num)
+    except:
+        print("请确保输入的是数字喔")
+    else:
+        print(f"结果为{p_num}")
+"""
+
+"""
+def count_words(file):
+    try:
+        with open(file) as f:
+            contents = f.read()
+    except:
+        print("文件不存在喔")
+    else:
+        print(contents)
+
+
+files = ['cat.txt', 'dog.txt']
+for file in files:
+    count_words(file)
+"""
+"""
+def count_words(file):
+    try:
+        with open(file) as f:
+            contents = f.read()
+    except:
+        pass
+    else:
+        print(contents)
+
+
+files = ['cat.txt', 'dog.txt']
+for file in files:
+    count_words(file)
+"""
+# 存储数据
+# 使用json模块1存储数据
+# 使用json.dump()和json.load()
+# json.dump()接受的实参:要存储的数据，可用于存储数据的文件对象
+"""
+import json
+numbers = [2,3,5,7,11,13]
+filename = 'numbers.json'
+with open(filename,'a') as f:
+    json.dump(numbers,f)
+"""
+"""
+import json
+filename = 'numbers.json'
+with open(filename) as f:
+    numbers = json.load(f)
+# json.load():将列表读取到内存中，即读取存储在文件中的信息，并将其赋值给变量
+
+print(numbers)
+"""
