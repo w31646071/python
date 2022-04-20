@@ -2670,8 +2670,8 @@ for file in files:
     count_words(file)
 """
 # 存储数据
-# 使用json模块1存储数据
-# 使用json.dump()和json.load()
+# 使用json模块存储数据
+# 使用json.dump()(保存)和json.load()（读取）
 # json.dump()接受的实参:要存储的数据，可用于存储数据的文件对象
 """
 import json
@@ -2688,4 +2688,412 @@ with open(filename) as f:
 # json.load():将列表读取到内存中，即读取存储在文件中的信息，并将其赋值给变量
 
 print(numbers)
+"""
+# 保存和读取用户生成的数据
+# 保存
+'''
+import json
+
+username = input("请输入你的名字:")
+filename = 'username.json'
+with open(filename, 'a') as f:
+    json.dump(username, f)
+    print(f"we will remember you when you come back,{username}")
+'''
+
+# 读取
+"""
+import json
+filename = 'username.json'
+with open(filename) as f:
+    username = json.load(f)
+    print(f"welcome back,{username}")
+"""
+# 将保存和读取操作合并到一个程序中
+# 代码有一定问题
+"""
+import json
+
+filename = 'username.json'
+try:
+    with open(filename) as f:
+        username = json.load(f)
+except FileNotFoundError:
+    username = input("what is your name?")
+    with open(filename, 'w') as f:
+        json.dump(username, f)
+        print(f"we will remember you when you come back,{username}")
+else:
+    print(f"welcome back,{username}")
+"""
+# 重构
+# 重构让代码更清晰，更易于理解，更容易拓展
+"""
+import json
+
+
+def greet_user():
+    filename = 'username.json'
+    try:
+        with open(filename) as f:
+            username = json.load(f)
+    except FileNotFoundError:
+        username = input("what is your name?")
+        with open(filename, 'a') as f:
+            json.dump(username, f)
+            print(f"we will remember you when you come back ,{username}")
+    else:
+        print(f"welcome back,{username}!")
+
+
+greet_user()
+"""
+
+# 重构greet_user()
+"""
+import json
+
+
+def get_stored_username():
+    filename = 'username.json'
+    try:
+        with open(filename) as f:
+            username = json.load(f)
+    except:
+        return None
+    else:
+        return username
+
+
+def greet_user():
+    username = get_stored_username()
+    if username:
+        print(f"welcome back,{username}")
+    else:
+        username = input(f"what is your name?")
+        filename = 'username.json'
+        with open(filename, 'a') as f:
+            json.dump(username, f)
+            print(f"we will remember you when you come back,{username}")
+
+
+greet_user()
+"""
+# 最终版本
+"""
+import json
+
+
+def get_stored_username():
+    filename = 'username.json'
+    try:
+        with open(filename) as f:
+            username = json.load(f)
+    except:
+        return None
+    else:
+        return username
+
+
+def get_new_username():
+    username = input("请输入你的名字:")
+    filename = 'username.json'
+    with open(filename, 'a') as f:
+        json.dump(username, f)
+    return username
+
+
+def greet_user():
+    username = get_stored_username()
+    filename = 'username.json'
+    if username:
+        print(f"welcome back,{username}")
+    else:
+        with open(filename, 'w') as f:
+            json.dump(username, f)
+        print(f"we will remember you when you come back,{username}")
+
+
+greet_user()
+"""
+"""
+import json
+
+numbers = input("请输入你最喜欢的一个数字:")
+filename = 'like_numbers.json'
+with open(filename,'a') as f:
+    json.dump(numbers,f)  # 存储操作
+"""
+"""
+import json
+filename = 'like_numbers.json'
+with open(filename) as f:
+    numbers = json.load(f)  # 读取操作
+    print(f"用户最喜欢的数字是:{numbers}")
+"""
+"""
+import json
+
+filename = 'like_numbers.json'
+try:
+    with open(filename) as f:
+        numbers = json.load(f)
+        print(f"用户最喜欢的数字是:{numbers}")
+except:
+    print(f"没有收集任何数字")
+    print(f"请输入你最喜欢的数字:")
+    numbers = input()
+    with open(filename, 'w') as f:
+        json.dump(numbers, f)
+"""
+"""
+import json
+
+
+def get_stored_username():
+    filename = 'username.json'
+    try:
+        with open(filename) as f:
+            username = json.load(f)
+    except:
+        return None
+    else:
+        return username
+
+
+def get_new_username():
+    username = input("请输入你的名字:")
+    filename = 'username.json'
+    with open(filename, 'a') as f:
+        json.dump(username, f)
+    return username
+
+
+def greet_user():
+    username = get_stored_username()
+    filename = 'username.json'
+    if username:
+        correct = input(f"are you {username}?(y/n)")
+        if correct == 'y':
+            print(f"welcome back,{username}!")
+        else:
+            username = get_stored_username()
+            print(f"we will remember you when you come back,{username}!")
+    else:
+        username = get_stored_username()
+        print(f"we will remember you when you come back,{username}")
+
+greet_user()
+"""
+# 测试代码
+# 测试函数
+# 此处将get_formatted_name作为一个函数模块写在其他与程序同在的文件夹中
+"""
+from get_formatted_name import *
+print("enter 'q' at any time to quit")
+active = True
+while active:
+    first = input("\nplease give me a first name:")
+    if first == 'q':
+        break
+    medium = input("\nplease give me a medium name:")
+    if medium == 'q':
+        break
+    last = input("\nplease give me a last name:")
+    if last == 'q':
+        break
+    formatted_name = get_formatted_name(first,medium,last)
+    print({formatted_name})
+"""
+# 单元测试和测试用例
+# 单元测试:核实函数的某个方面没有问题
+# 测试用例:一组单元测试，核实函数再各种情况下的行为都符合要求
+# 全覆盖测试:全覆盖的测试用例包含一整套单元测试，涵盖了各种可能的函数使用方式
+# 可通过的测试
+"""
+import unittest
+from name_function import get_formatted_name
+
+
+class NamesTestCase(unittest.TestCase):  # 进行测试时必须继承unittest.TestCase类
+    def test_first_last(self):
+        formatted_name = get_formatted_name('janis', 'joplin')
+        self.assertEqual(formatted_name, 'Janis Joplin')  # 将formatted_name的值与字符串"Janis Joplin"比较
+        # 此处为unittest类的断言方法
+        # 断言方法核实到的结果是否与期望的结果一致
+        #self.assertEqual():第一个参数应为被测试的函数的运行结果，可以将这个结果赋值给一个变量，第二个参数应为期望中运行函数所得到的运行结果
+
+
+if __name__ == '__main__':
+    unittest.main()
+"""
+# 未通过的测试
+"""
+import unittest
+from name_function import get_formatted_name
+
+
+class NameTestCase(unittest.TestCase):
+    def test_first_middle_last(self):
+        formatted_name = get_formatted_name('janis', 'joplin')
+        self.assertEqual(formatted_name, 'Janis  Joplin')
+"""
+# 测试未通过时怎么办
+# 不要修改测试，应修改导致测试不能通过的代码
+# 检查对函数所做的更改，找出导致函数行为不符合预期的修改
+# 对之前函数的修改:
+"""
+import unittest
+from name_function import get_formatted_name
+
+
+class NameTestCase(unittest.TestCase):
+    def test_first_middle_last(self):
+        formatted_name = get_formatted_name('janis', 'joplin')
+        self.assertEqual(formatted_name, 'Janis Joplin')
+
+
+if __name__ == '__main__':
+    unittest.main()
+"""
+# 添加新测试
+"""
+import unittest
+from name_function import get_formatted_name
+
+
+class NameTestCase(unittest.TestCase):
+    def test_first_last_name(self):
+        formatted_name = get_formatted_name('janis', 'joplin')
+        self.assertEqual(formatted_name, 'Janis Joplin')
+
+    def test_first_middle_name(self):
+        formatted_name = get_formatted_name('wolfgang','mozart','amadeus')
+        self.assertEqual(formatted_name,'Wolfgang Amadeus Mozart')
+
+
+if __name__ == '__main__':
+    unittest.main()
+"""
+"""
+import unittest
+from City import city_functions
+
+
+class CityTestCase(unittest.TestCase):
+    def test_city_country(self):
+        ims = city_functions('santiago', 'chile')
+        self.assertEqual(ims, 'Santiago Chile - ')
+
+    def test_city_country_population(self):
+        ims = city_functions('santiago','chile',50000)
+        self.assertEqual(ims,'Santiago Chile - 50000')
+
+
+if __name__ == '__main__':
+    unittest.main()
+"""
+# 测试类
+# 各种断言方法:
+# asserEqual(a,b):核实a == b
+# assertNotEqual(a,b):核实a != b
+# assertTrue(x):核实x为True
+# assertFalse(x):核实x为False
+# assertIn(item,list):核实item在list种
+# assertNotIn(item,list):核实item不在list中
+# 一个要测试的类
+# 测试AnonymousSurvey类可以正确工作
+"""
+from survey import AnonymousSurvey
+
+question = "what language did you first learn to speak?"
+my_survey = AnonymousSurvey(question)
+# 显示问题并存储答案
+my_survey.show_question()
+print("enter 'q' at any time to quit.\n")
+active = True
+while active:
+    response = input("Language:")
+    if response == 'q':
+        break
+    my_survey.store_response(response)
+# 显示调查结果
+print("\nthank you to everyone who participated in the survey!")
+my_survey.show_results()
+"""
+# 对AnonymousSurvey类进行测试
+"""
+import unittest
+from survey import AnonymousSurvey
+
+
+class TestAnonymousSurvey(unittest.TestCase):
+    def test_store_single_response(self):
+        question = "what language did you first learn to speak?"
+        my_survey = AnonymousSurvey(question)
+        my_survey.store_response('English')
+        self.assertIn('English',my_survey.responses)
+
+    def test_store_three_responses(self):
+        question = "what language did you first learn to speak?"
+        my_survey = AnonymousSurvey(question)
+        responses = ['English', 'Spanish', 'Mandarin']
+        for response in responses:
+            my_survey.store_response(response)
+        for response in responses:
+            self.assertIn(response, my_survey.responses)
+        # 核实三个答案是否被保存于my_survey.responses之中
+
+
+if __name__ == '__main__':
+    unittest.main()
+"""
+# 方法setUp()
+"""
+import unittest
+from survey import AnonymousSurvey
+
+
+class TestAnonymousSurvey(unittest.TestCase):
+    # 针对AnonymousSurvey类的测试
+    def setUp(self):
+        # 创建一个调查对象和一组答案，供使用的测试方法使用
+        question = "what language did you first learn to speak?"
+        self.my_survey = AnonymousSurvey(question)
+        self.responses = ['English', 'Spanish', 'Mandarin']
+        #  setUp()创建了一个调查对象和一个答案列表
+    def test_store_single_response(self):
+        self.my_survey.store_response(self.responses[0])
+        self.assertIn(self.responses[0], self.my_survey.responses)
+
+    def test_store_three_responses(self):
+        for response in self.responses:
+            self.my_survey.store_response(response)
+        for response in self.responses:
+            self.assertIn(response, self.my_survey.responses)
+
+
+if __name__ == '__main__':
+    unittest.main()
+"""
+"""
+import unittest
+from employee import Employee
+
+
+class TestEmployee(unittest.TestCase):
+    def setUp(self):
+        self.eric = Employee('eric', 'mattes', 65000)
+
+    def test_give_default_raise(self):
+        self.eric.give_raise()
+        self.assertEqual(self.eric.salary, 70000)
+
+    def test_give_custom_raise(self):
+        self.eric.give_raise(10000)
+        self.assertEqual(self.eric.salary, 75000)
+
+
+if __name__ == '__main__':
+    unittest.main()
 """
