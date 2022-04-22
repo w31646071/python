@@ -1,3099 +1,720 @@
-'''
-peoples = ['1', '2', '3', '4', '5']
-print(len(peoples))
-print(peoples)
-message = f'我想邀请{peoples}来参加晚餐'  # 嘉宾名单
-print(message)
-message = f'{peoples[0]}不能参加晚餐'  # 指出1号嘉宾不能参加晚餐
-print(message)
-popped_peoples = peoples.pop(0)  # 将1号嘉宾从邀请名单中删除
-peoples.insert(0, '6')  # 将6号嘉宾添加到邀请名单的0号位置
-print(peoples)
-message = f'我想邀请{peoples}来参加晚餐'
-print(message)
-peoples.insert(0, '7')  # 使用insert（）将一位新嘉宾添加到名单开头
-peoples.insert(3, '8')  # 使用insert（）将一位新嘉宾添加到名单中间
-peoples.append('9')  # 使用append（）将最后一名新建吗添加到名单末尾
-print(peoples)
-message = f'我想邀请{peoples}来参加晚餐'
-print(message)
-message = f'我只能邀请两位嘉宾参加晚餐'
-print(message)
-for i in range(6):
-    i = 1
-    i += 1
-    peoples.pop(i)
-for n in range(1):
-    n = 0
-    n += 1
-    del peoples[n]
-del peoples[0]
-print(peoples)
-'''
-'''
-car = ['bmw','audi','toyota','subaru']
-'''
-'''
-car.sort()
-print(car)
-car.sort(reverse=True)
-print(car)
-print(sorted(car))
-print(car)
-'''
-'''
-car.reverse()
-print(car)
-s = len(car)
-print(s)
-'''
-'''
-bings = ['1', '2', '3']
-for bing in bings:
-    print(f'i like {bing} pizza')
-print(f' i really love pizza!')
-'''
-'''
-dongwus = ['1','2','3']
-for dongwu in dongwus:
-    print(f'A {dongwu} make a great pet')
-print(f'Any of these animals would make a great pet!')
-'''
+from cmath import pi
+from copy import deepcopy
+from typing import List
+
+# 第一章 快速上手:基础知识
+# 通过另一本基础知识巩固一下
+# 函数
 """
-for value in range(1,5):
-    print(value)
-for value in range(1,6):
-    print(value)
-for value in range(6):
-    print(value)
+i = pow(2,3)  # pow():乘方函数
+print(int(i))
 """
+"""
+import turtle
+from turtle import *
+
+active = True
+while active:
+    turtle.forward(100)
+    turtle.left(120)
+    turtle.forward(100)
+    turtle.left(120)
+    turtle.forward(100)
+    keys = input()
+    if keys == 'q':
+        break
+"""
+# 第二章 列表和元组
+# 数据结构:以某种方式组合起来的数据元素集合
+"""
+edward = ['edward gumby',42]
+john = ['john smith',50]
+database = [edward,john]
+print(database)
+"""
+# 通用的序列操作
+# 索引  序列中的所有元素都有编号，这些编号从0开始递增
+"""
+greeting = 'Hello'
+print(greeting[0])  # 打印第一个元素
+print(greeting[-1])  # 打印列表中最后一个元素
+print(greeting[1])  # 打印列表中第二个元素
+"""
+# 如果函数调用返回一个序列，可以直接对其执行索引操作
+"""
+froth = input('Year:')[3]
+print(froth)
+"""
+"""
+months = [
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'december',
+]
+endings = ['st','nd','rd'] + 17 * ['th'] + ['st','nd','rd'] + 7 * ['th'] + ['st']
+year = input('Year:')
+month = input('Month:')
+day = input('Day:')
+
+month_number = int(month)
+day_number = int(day)
+
+month_name = months[month_number-1]
+ordinal = day + endings[day_number-1]
+print(f"{month_name}  {ordinal}  {year}")
+"""
+# 切片:使用两个索引，并用冒号分隔，其中，第一个索引指定的元素包含在切片内，第二个索引指定的元素不包含在切片内
+"""
+num = [1,2,3,4,5,6,7,8,9,10]
+img = num[3:6]  
+print(img)
+"""
+"""
+url = input('Please enter the URL:')
+domain = url[4:-4]
+print(f"domain name is {domain}")
+"""
+# 更大的步长  在切片中，第三个参数为步长  步长为正，向右移动，步长为负，向左移动
+"""
+num = [1,2,3,4,5,6,7,8,9,10]
+img = num[0:10:1]  # 索引10代表第11个元素，它并不存在，但确实是到达最后一个元素后在前进一步所处的位置
+print(img)
+"""
+# 序列相加  一般来说，不能拼接(此处的拼接指使用‘+’拼接)不同类型的序列
 """"
-numbers = list(range(1,7))
-print(numbers)
-"""
-"""
-numbers = list(range(2,11,2))
-print(numbers)
-"""
-"""
-squares = []  # 创建一个新的空列表
-for value in range(1, 11): # 使用函数range（）便利1到10的值
-    square = value ** 2  # 在python中，**表示乘方
-    squares.append(square)  # 将乘方后的数据利用append添加到空列表squares中
-print(squares)  # 输出变更后的列表squares
-"""
-"""
-squares = []
-for value in range(1,11):
-    squares.append(value**2)  # 相对于上一个代码，此处直接将value的值平方，并立即添加到空列表squares中（更为简洁）
-print(squares)
-"""
-"""
-digits = [1,2,3,4,5,6,7,8,9,0]
-f1 = min(digits)  # min：列表中最小的数
-f2 = max(digits)  # max：列表中最大的数
-f3 = sum(digits)  # sum：列表中所有数相加
-print(f1,f2,f3)
-"""
-"""
-squares = [value ** 2 for value in range(1,11)]  # 指定一个描述性的列表名 
-print(squares)
-"""
-"""
-for value in range(1,20):
-    print(value)
-"""
-"""
-for value in range(1,1000001):
-    print(value)
-"""
-"""
-digits = [value for value in range(1,1000001)]  # 方括号中第一个函数应为for后的函数名 
-f1 = min(digits)
-f2 = max(digits)
-f3 = sum(digits)
-print(f1,f2,f3)
-"""
-"""
-digits = [value for value in range(1,21,2)]  #直接创建一个列表，其中包含1到21中所有的奇数
-print(digits)
-"""
-"""
-digits = [value for value in range(3,31,3)]  # 直接创建一个列表，其中包含3到31中所有可以被3整除的数
-print(digits)
-"""
-"""
-for value in range(11):
-    value = value ** 3  # 在python中，立方用**3表示
-    print(value)
-"""
-"""
-numbers = [value **3 for value in range(11)]  # 对上面前十个整数的立方用列表进行解析
-print(numbers)
-"""
-"""
-players = ['charles','martina','michael','florence','eli']
-print(players[0:3])  # 从列表中的第0号元素开始，提取列表中第3号元素之前所有的元素，共3个元素
-"""
-"""
-players = ['charles','martina','michael','florence','eli']
-print(players[1:4])  #从列表中的第1号元素开始，提取列表中第4号元素之前所有的元素，共3个元素
-"""
-"""
-players = ['charles','martina','michael','florence','eli']
-print(players[:4])  # 从列表中第0到元素开始，提取列表中第4号元素之前所有的元素，共4个元素
-"""
-"""
-players = ['charles','martina','michael','florence','eli']  
-print(players[2:])  # 从列表中第2号元素开始，提取列表中最后一号元素之前所有的元素，不确定有多少元素
-"""
-"""
-players = ['charles','martina','michael','florence','eli']
-print(players[-3:])  # 复数索引返回距离列表末尾相应距离的元素，最后一号元素为-1
-"""
-"""
-players = ['charles','martina','michael','florence','eli']
-print("here are the first three players on my team:")
-for player in players[:3]:
-    print(player.title())
-"""
-"""
-first_list = ['1','2','3']
-second_list = first_list[:]  # [:]：同时省略起始索引和终止索引，创建一个始于第一个元素并止于最后一个元素的切片，即整个列表的副本，可以用于复制列表
-print(first_list)
-print(second_list)
-"""
-"""
-lists = ['1','2','3','4','5']
-print('the first three items in the list are:')
-for list in lists[:3]:
-    print(list)
-"""
-"""
-lists = ['1','2','3','4','5']
-print('three items form the middle of the list are:')
-a = int(len(lists)/2)  # 使用len()函数获取列表list的长度，并赋予int整型类型，将长度除2获取中位数并赋值于a
-for list in lists[a-1:a+1]:  # a-1，a+1获取列表lists中间三个数在列表lists中的元素位置
-    print(list)
-"""
-"""
-lists = ['1','2','3','4','5']
-print("the last three items in the list are:")
-for list in lists[-3:]:  # 打印列表末尾三个元素
-    print(list)
-"""
-"""
-my_pizzas = ['pizza','falafel','carrot cake']
-friend_pizzas = my_pizzas[:]
-my_pizzas.append('ah hhh')
-friend_pizzas.append('wuhu')
-print(my_pizzas)
-print(friend_pizzas)
-for food in friend_pizzas[0:]:
-    print(food)
-for foods in my_pizzas[0:]:
-    print(foods)
-"""
-"""
-dimensions = (200,50)  # python不能修改元组中的元素，可以修改列表中的元素   元组：()  列表：[]
-print(dimensions[0])
-print(dimensions[1])
-"""
-"""
-tuples = (1,2,3,4,5)
-for num_tup in tuples:
-    print(num_tup)
-"""
-"""
-foods = (1,2,3,4,5)
-for food in foods:
-    print(food)
-"""
-"""
-foods[1] = 2  # 元组不允许赋值
-print(foods)
-"""
-"""
-foods = (1,2,3,4,5)
-print("old foods:")
-for food in foods:
-    print(food)
-foods = (2,4,6,8,10)
-print("\n new foods:")
-for food in foods:
-    print(food)
-"""
-"""
-cars = ['audi','bmw','subaru','toyota']  # 创建一个新的列表
-for car in cars:
-    if car == 'bmw':  # 条件测试              #  =：赋值   ==：判断
-        print(car.upper())  # 条件为True时执行
-    else:  # 条件为False时执行
-        print(car.title())
-"""
-"""
-requested_topping = 'mushrooms'
-if requested_topping != 'anchovies':  # !=：检查两个值是否不相等，其中，!表示“不”
-    print("Hold the anchovies!")
-"""
-"""
-answer = 17
-if answer != 42:
-    print("that is not the correct answer."
-          "Please try again ")
-"""
-"""
-age_0 = 22
-age_1 = 18
-age_0 >= 21 and age_1 >= 21  # False
-"""
-"""
-age_0 = 22
-age_1 = 21
-age_0 >= 21 and age_1 >= 21  # True
- # 使用and条件检查多个条件，即为”与“门： 0 and 1 = 0   1 and 1 = 1  0 and 0 = 0   1 and 0 = 0
-"""
-"""
-age_0 = 22
-age_1 = 18
-age_0 >= 21 or age_1 >= 21  #True
-"""
-"""
-age_0 = 18
-age_1 = 18
-age_0 >= 21 or age_1 >= 21  #False
-  # 使用or条件检查多个条件，即为“非”门：0 or 0 = 0   1 aor 0 = 1  1 or 1 = 1   0 or 1 =1 
-"""
-"""
-requested_toppings = ['mushrooms','onions','pineapple']
-'mushrooms' in requested_toppings  # True
-'pepperoni' in requested_toppings  # False
-"""
-"""
-banned_users = ['andrew','carolina','david']
-user = 'marie'
-if user not in banned_users:  # 检查特定值是否不包含在列表中
-    print(f'{user.title()},you can post a response if you wish.')
-"""
-"""
-age = 19                                  # if语句格式：
-if age >= 18:                             # if conditional_test:
-    print('you are old enough to vote !')#   do something
-"""
-"""
-age = 19
-if age >= 18:
-    print(' you are old enough to vote !')
-    print(' have you registered to vote yet ? ')
-"""
-"""
-age = 17
-if age >= 18:
-    print(' you are old enough to vote !')
-    print(' have you registered to vote yet ? ')
-else:  # 当if的条件未满足时执行else后的操作
-    print('sorry,you are too young to vote !')
-"""
-"""
-age = 12
-if age < 4:
-    print('free')
-elif 4 <= age <= 18:  # 当if条件未通过时执行elif条件
-    print('25')
-else:  # else后直接跟":"，当elif条件未通过时执行else条件
-    print('40')
-"""
-"""
-age = 12
-if age < 4:
-    price = 0
-elif 4 <= age <= 18:
-    price = 25
+f_x = [1,2,3]
+s_x = [4,5,6]
+p_x = f_x + s_x
+print(p_x)
+"""
+"""
+f_x = ([1,2,3])
+s_x = 'world'
+print(f"{f_x}  {s_x}")
+"""
+# 乘法
+"""
+img = ['python']
+mis = img * 5
+print(mis)
+"""
+# None 空列表 初始化
+"""
+img = [None]
+msi = img * 10
+print(msi)
+"""
+# 在合适的位置在一个方框内打印一个句子
+"""
+sentence = input("Sentence:")
+screen_width = 80
+text_width = len(sentence)
+box_width = text_width + 6
+left_margin = (screen_width - box_width) // 2
+
+print()
+print('' * left_margin + '+' + '-' * (box_width - 2) + '+')
+print('' * left_margin + '| ' + ' ' * text_width + '   |')
+print('' * left_margin + '| ' + sentence + '   |')
+print('' * left_margin + '| ' + ' ' * text_width + '   |')
+print('' * left_margin + '+' + '-' * (box_width - 2) + '+')
+print()
+"""
+# 成员资格
+"""
+database = [
+    ['albert', '1234'],
+    ['dilbert', '4242'],
+    ['smith', '7524'],
+    ['jones', '9843'],
+]
+username = input("User name:")
+pin = input("PIN Code:")
+if [username, pin] in database:
+    print("登录成功")
 else:
-    price = 40
-print(f' you should pay {price}! ')  # 相较于上一个程序，简化了条件测试过程
+    print("用户名或密码错误")
+"""
+# 长度，最小值和最大值
+"""
+numbers = [100,34,678]
+print(len(numbers))
+print(max(numbers))
+print(min(numbers))
+"""
+# 列表:python的主力
+# 函数list  任何序列都可以作为list的参数
+"""
+print(list('Hello'))
+"""
+# 基本的列表操作
+# 修改列表:给列表赋值:应使用索引表示法给特定位置的元素赋值
+""""
+x = [1,2,3]
+x[0] = 12  
+print(x)
+"""
+# 删除元素: del语句
+"""
+x = [1,2,3]
+del x[0]
+print(x)
+"""
+# 给切片赋值  可以将切片替换成长度与其不同的序列  还可以再不替换原有元素的情况下插入新元素
+"""
+x = list('perl')
+print(x)
+x[2:] = list('12')
+print(x)
 """
 """
-age = 12  # 使用多个elif代码块进行判断
-if age < 4:
-    price = 0
-elif 4 <= age <= 18:
-    price = 24
-elif 18 <= age <= 65:
-    price = 40
+x = [1,2]
+print(x)
+x[0:] = [1,2,3,4,5]
+print(x)
+"""
+"""
+x = [1,2]
+print(x)
+x[0:] = []  # 将切片的值替换为空列表，可以作为一种删除列表内元素的方法
+print(x)
+"""
+# 列表方法
+# 调用语句: object.method(arguments)
+# append()方法:将一个对象附加到列表末尾  '()'中为指定的元素
+"""
+x = [1,2]
+print(x)
+x.append(3)
+print(x)
+"""
+# clear方法:就地清空列表的内容
+"""
+x = [1,2]
+print(x)
+y = x[:]
+print(y)
+x.clear()
+print(x)
+"""
+# copy方法:复制列表，常规复制只是将另一个名称关联到列表
+"""
+x = [1,2,3]
+print(x)
+y = x.copy()  # 此方法等价于y = x[:]以及y = list(x)
+print(y)
+"""
+# count()方法:计算指定的元素在列表中出现多少次  ’()‘中为指定的元素
+"""
+x = [1,1,1,1,1,2,2,3,4,3,3,5,]
+y = x.count(1)
+print(y)
+"""
+# extend()方法:同时将多个值附加到列表末尾  ’()'中为指定内容
+# 与拼接操作不同，拼接操作不会修改原列表
+"""
+x = [1,2,3]
+y = [4,5,6]
+x.extend(y)
+print(x)
+"""
+# index操作:在列表中查询指定值第一次出现的位置
+"""
+x = [8,2,3,4,5,6,1,1]
+try:
+    m = x.index(0)
+except:
+    print("0没有出现在列表中")
 else:
-    price = 20
-print(f' you should pay {price} ')
+    print(m)
+y = x.index(1)
+print(y)
+"""
+# insert()方法:将指定元素插入到指定位置,具有两个参数，第一个参数为插入的指定位置，第二个参数为插入的指定元素
+"""
+x = [1,2,3,4,5]
+x.insert(0,1)
+print(x)
+"""
+'''
+x = [1,2,3,4,5]
+"""
+x.pop(0)
+print(x)
+"""
+x.remove(5)
+print(x)
+'''
+# pop()方法:从列表中删除一个元素，并返回这一元素
+# 方法pop()与方法remove()区别:
+# 方法pop()删除指定位置的元素
+# remove()删除指定元素
+# pop()方法:
+"""
+x = [1,2,3,4,5]
+x.pop(0)  # 删除列表x中位置为0号的元素
+print(x)
+# 结果为:[2,3,4,5]
+"""
+# remove方法:
+"""
+x = [1,2,3,4,5]
+x.remove(5)  # 删除列表x中值为5的元素
+print(x)
+# 结果为:[1,2,3,4]
+"""
+# reverse方法:按相反顺序排列列表中的元素
+"""
+x = [1,2,3,4,5]
+x.reverse()
+print(x)
+"""
+# sort()方法:对列表就地排序
+"""
+x = [4,6,2,1,7,9]
+x.sort()
+print(x)
+"""
+# 高级排序
+# sort()方法接受两个可选参数key和reverse
+"""
+x = ['aardvark','abalone','acme','add','aerate']
+x.sort(key=len)
+print(x)
+"""
+# reverse=Ture为降序，reverse=False为升序
+"""
+x = [4,6,2,1,7,9]
+x.sort(reverse=True)
+print(x)
+"""
+# 元组:不可修改的元素
+"""
+x = (1,2,3)
+print(x)
 """
 """
-age = 12
-if age < 4:
-    price = 0
-elif 4 <= age < 18:
-    price = 24
-elif 18 <= age < 65:
-    price = 40
-elif age >= 65:
-    price = 20
-print(f' you should pay {price} ! ')  # 某些情况下省略else代码模块可以使判断条件更为清晰
-"""
-# if-elif-else代码模块仅仅适合于只有一个条件满足的情况，可以测试一个特定的条件。
-# 下面的代码模块可以检查所有条件
-"""
-requested_toppings = ['mushrooms','extra-cheese']
-if 'mushrooms' in requested_toppings:
-    print('adding mushrooms')
-if 'extra-cheese' in requested_toppings:
-    print('adding extra-cheese')
-if 'pepperoni' in requested_toppings:
-    print('adding pepperoni')
-print("\n finished making your pizza!")
-"""
-"""
-alien_color = ['green','yellow','red']
-if 'green' in alien_colour:
-    print('5')
-"""
-"""
-alien_color = ['yellow','red']
-if 'green' in alien_colour:
-    print('5')
-"""
-"""
-alien_color = ['green','yellow','red']
-if 'green' in alien_color:
-    print('5')
+x = (1,2,3)
+try:
+    x[0] = 2
+except:
+    print("不能修改元组的内容")
 else:
-    print('10')
+    print(x)
+"""
+# 元组可以是空元组
+"""
+x = ()
+print(x)
+"""
+# 当元组中只有一个值时，需要在值后加上','，如果不加','，即表示为一个某种类型的值
+"""
+x = (42,)
+print(x)
+"""
+# 元组将一个序列作为参数，并将其转化为元组，如果参数已经是元组，就原封不动的返回参数
+# 第三章 使用字符串
+# 字符串基本操作
+# 字符串是不可变的，因此所有的元素赋值和切片赋值都是非法的
+# 设置字符串格式:
+# 调用方法format,并提供要设置其格式的值
+# 替换字段的组成:
+# 字段名:索引或标识符，指出要设置哪个值的格式并使用结果来代替该字段
+# 转换标志:跟在叹号‘!’后面的单个字符，当前支持的字符包括r:repr,s:str,a:ascii
+# 格式说明符:跟在冒号后面的表达式，可以详细的指定最终的格式，包括格式类型，字段宽度以及数的精度
+# 替换字段名
+""""
+ims = "{foo} {} {bar} {}".format(1,2,bar=4,foo=3)
+print(ims)
 """
 """
-alien_color = ['yellow','red']
-if 'green' in alien_color:
-    print('5')
-else:
-    print('10')
+ims = "{foo} {1} {bar} {0}".format(1, 2, bar=4, foo=3)
+# 可以通过索引来指定要在哪个字段中使用相应的未命名参数
+print(ims)
 """
 """
-alien_color = ['green','yellow','red']  # 总体版本
-if 'green' in alien_color:
-    print('5')
-elif 'yellow' in alien_color:
-    print('10')
-else:
-    print('15')
+fullname = ['Alfred', 'Smoketoomuch']
+ims = "Mr{name[0]}".format(name=fullname)
+print(ims)
+# 在这里将列表fullname的内容赋值给name，则列表name的内容与列表fullname的内容相同，name[0]表示在name列表中处于第0号位置的元素
+"""
+# 基本转换
+# 首先应提供一个转换标志，用于指定转换格式
+"""
+print("{pi!s}{pi!r}{pi!a}".format(pi='Π'))
 """
 """
-alien_color = ['green']  # 绿色  
-if 'green' in alien_color:
-    print('5')
-elif 'yellow' in alien_color:
-    print('10')
-else:
-    print('15')
+ims = "the number is {num}".format(num=42)
+print(ims)
+ims = "the number is {num:f}".format(num=42)
+print(ims)  # 转化为小数
+ims = "the number is {num:x}".format(num=42)
+print(ims)  # 转化为小写字母的十六进制数
+ims = "the number is {num:b}".format(num=42)
+print(ims)  # 转化为二进制数
+"""
+# 宽度，精度与千位分隔符
+# 设置浮点数的格式时，默认在小数点后面显示6位小数，同时根据需要设置字段的宽度，而不进行任何形式的填充
+# 同时，数和字符串的对对齐方式不同
+"""
+ims = "{num:10}".format(num=3)
+print(ims)  # 数的对齐方式:         3
 """
 """
-alien_color = ['yellow']  # 黄色  
-if 'green' in alien_color:
-    print('5')
-elif 'yellow' in alien_color:
-    print('10')
-else:
-    print('15')
+ims = "{num:10}".format(num='Bob')
+print(ims)  #字符串的对齐方式: Bob       
+"""
+# 精度使用整数指定，但需要在前面加上一个表示小数点的句点'.'
+"""
+ims = "pi day is {pi:.2f}".format(pi=pi)
+print(ims)
 """
 """
-alien_color = ['red']  # 红色
-if 'green' in alien_color:
-    print('5')
-elif 'yellow' in alien_color:
-    print('10')
-else:
-    print('15')
+ims = "{pi:10.2f}".format(pi=pi)
+print(ims)
+"""
+# 添加千位分隔符
+"""
+ims = "{:,}".format(10**100)
+print(ims)
+"""
+# 符号 对齐 0填充
+"""
+ims = "{:010.2f}".format(pi)
+print(ims)  # 0000003.14
+ims = "{0:<10.2f}".format(pi)
+print(ims)  #3.14
+ims = "{0:>10.2f}".format(pi)
+print(ims)  #       3.14
+ims = "{0:^10.2f}".format(pi)
+print(ims)  #   3.14   
+"""
+# 用符号填充
+"""
+ims = "{:$^15.2f}".format(pi)
+print(ims)
+"""
+# 说明符=:指定将填充字符放在符号和数字之间
+"""
+print('{0:10.2f}\n{1:10.2f}'.format(pi,-pi))
+#       3.14
+#      -3.14
+print('{0:10.2f}\n{1:=10.2f}'.format(pi,-pi))
+#      3.14
+#-     3.14
 """
 """
-age = 70
-if age < 2:
-    print('婴儿')
-elif 2 <= age < 4:
-    print('幼年')
-elif 4 <= age < 13:
-    print('儿童')
-elif 13 <= age < 20:
-    print('青少年')
-elif 20 <= age < 65:
-    print('成年人')
-else:
-    print('老年人')
+print('{0:-.2}\n{1:-.2}'.format(pi, -pi))
+# 3.1
+# -3.1
+print('{0:+.2}\n{1:+.2}'.format(pi, -pi))
+# +3.1
+# -3.1
+print('{0: .2}\n{1: .2}'.format(pi, -pi))
+# 3.1
+#-3.1
+"""
+# 井号’#‘:触发另一种转换方式，转换细节碎类型而异
+"""
+print('{:b}'.format(45))  # 101101
+print('{:#b}'.format(45))  # 0b101101
+print('{:g}'.format(45))  # 45
+print('{:#g}'.format(45))  # 45.0000
 """
 """
-favorite_fruits = ['1','2','3']
-if '1' in favorite_fruits:
-    print('you really like 1 !')
-if '2' in favorite_fruits:
-    print('you really like 2 !')
-if '3' in favorite_fruits:
-    print('you really like 3 !')
-if '4' in favorite_fruits:
-    print('you really like 4 !')
-if '5' in favorite_fruits:
-    print('you really like 5 !')
+width = int(input("please enter width:"))
+
+price_width = 10
+item_width = width - price_width
+
+header_fmt = '{{:{}}}'.format(item_width,price_width)
+fmt = '{{:{}}}{{:>{}.2f}}'.format(item_width,price_width)
+
+print('='*width)
+print(header_fmt.format('Item','Price'))
+print('-'*width)
+
+print(fmt.format('apple',0.4))
+print(fmt.format('pears',0.5))
+print(fmt.format('cantaloupes',1.92))
+print(fmt.format('dried apricots(16 oz.)',8))
+print(fmt.format('prunes(4 lbs.)',12))
+print('='*width)
+# please enter width:35
+# ===================================
+# Item                     
+# -----------------------------------
+# apple                          0.40
+# pears                          0.50
+# cantaloupes                    1.92
+# dried apricots(16 oz.)         8.00
+# prunes(4 lbs.)                12.00
+# ===================================
+"""
+# 字符串方法
+# center()方法:在两边添加填充字符(默认为空格)让字符居中  第一个参数为希望得到的填充后的字符数，第二个参数为希望用来填充的符号
+"""
+print("the middle by jimmy eat world".center(39))
+print("the middle by jimmy eat world".center(39,'*'))
+"""
+# find()方法:在字符串中查找子串，如果找到则返回子串的第一个字符的索引，找不到返回-1
+"""
+print('with a moo-moo here,and a moo-moo there'.find('moo'))
+title = 'monty python is flying circus'
+i = title.find('monty')
+q = title.find('python')
+r = title.find('1')
+print(i,q,r)
 """
 """
-requested_toppings = ['mushrooms','green-peppers','extra cheese']
-for requested_topping in requested_toppings:
-    print(f' adding {requested_topping}')
-print('/n finished making your pizza !')
+subject = '$$$ get rich now ! $$$'
+i = subject.find('$$$')
+print(i)
+"""
+# join()方法:合并序列的元素
+"""
+dirs = '','user','bin','env'
+i = '/'.join(dirs)
+print(i)
 """
 """
-requested_toppings = ['mushrooms', 'green-peppers', 'extra cheese']
-for requested_topping in requested_toppings:
-    if requested_topping == 'green-peppers':  # if语句可以检查特殊元素
-        print('sorry,we are out of green peppers right now')
-    else:
-        print(f' adding {requested_topping}')
-print('/n finished making your pizza !')
+dirs = '','user','bin','env'
+print('C:'+'\\'.join(dirs))
 """
+# lower()方法:返回字符串的小写版本
+# 可以用于不区分大小写
 """
-# if语句可以用于检查列表是否为空
-requested_toppings = []
-if requested_toppings:
-# 先对列表进行一个简单的检查，而不是直接执行for循环，在列表至少有一个元素时返回true，在列表为空时返回false并执行else语句
-    for requested_topping in requested_toppings:
-        print(f' adding {requested_topping}')
-else:
-    print('are you sure you want a plain pizza?')
+i = 'ABCDEFG'
+print(i.lower())
 """
+# replace()方法:将指定的子串都替换成另一个字符串，并返回替换后的结果
+# 第一个参数为想要替换的目标子串，第二个参数为期望替换目标子串的字符串
 """
-available_toppings = ['mushrooms','olives','green peppers','pepperoni','pineapple','extra cheese']
-requester_toppings = ['mushrooms','french-fries','extra cheese']
-for requester_topping in requester_toppings:
-    if requester_topping in available_toppings:
-        print(f'adding {requester_topping}')
-    else:
-        print(f'sorry we do not have {requester_topping}')
-    print('\n finished making your pizza !')
+i = 'this is a test'
+w = i.replace('is','eez')
+print(w)
 """
+# split方法:将字符串拆分为序列
+# 第一个参数为指定的分隔符，默认为空格，第二个参数为分隔次数，默认为-1，即分隔所有
+# 分隔符应为原本字符串中的字符
 """
-# 以特殊方式跟管理员打招呼
-yhms = ['admin','1','2','3','4']
-for yhm in yhms:  # 利用for函数遍历列表yhms的内容
-    if yhm == 'admin':  # yhm的值为admin
-        print('hello admin,would you like to see a status report?')
-    else:  # yhm值不是admin
-        print(f' hello {yhm},thank you for logging in again')
+i = '1+2+3+4+5'
+m = i.split('+')
+print(m)
+i = '1+2+3+4+5'
+m = i.split('+',5)
+print(m)
 """
+# strip()方法:用于删除字符串中开头和末尾的空白
+# rstrip()方法:用于删除字符串末尾的空白
+# lstrip()方法:用于删除字符串开头的空白
+# 当()内有参数时，则删除指定的字符
+# translate方法:替换字符串中的特定部分，只能进行单字符替换，可以同时替换多个字符
+# 第一个字符和第二个字符的长度应相同
+# 同时，其第三个参数可选，功能为指定删除某些字符
+# 在使用方法translate时，应先创建一个转换表
 """
-yhms = []
-if yhms:  # 利用if语句对列表yhms进行判空
-    for yhm in yhms:  # 列表yhms不为空列表
-        if yhm == 'admin':
-            print('hello admin,would you like to see a status report?')
-        else:
-            print(f' hello {yhm},thank you for logging in again')
-else:  # 列表yhms为空列表
-    print('没用户？什么玩意儿？')
+table = str.maketrans('cs','kz')
+i = 'this is an incredible test'.translate(table)
+print(i)
 """
+# 判断字符串是否满足特定的条件
+# 第四章 字典
+# 创建和使用字典
+# 函数dict()  # 利用函数dict()可以创建一个字典
 """
-current_users = ['1','2','3','4','5']
-new_users = ['1','2','6','7','8']
-for new_user in new_users:
-    if new_user in current_users:
-        print('换个用户名吧')
-    else:
-        print('欸嘿，这个可以用喔')
-"""
-"""
-nums = ['1','2','3','4','5','6','7','8','9']
-for num in nums:
-    if num == '1':
-        print(f'{num}st')
-    elif num == '2':
-        print(f'{num}nd')
-    elif num == '3':
-        print(f'{num}rd')
-    else:
-        print(f'{num}th')
-"""
-"""
-# 字典数据类型，用{}表示，一对一对应，格式为'键':'内容'，两个键值之间用‘，’隔开
-alien_0 = {'color':'green','points':5}
-print(alien_0['color'])
-print(alien_0['points'])
-"""
-"""
-alien_0 = {'color':'green','points':5}
-new_points = alien_0['points']
-print(f' you have get {new_points} points !')
-"""
-"""
-alien_0 = {'color':'green','points':5}
-print(alien_0)
-# 向字典里添加键值对的方法
-alien_0['x_position'] = 0
-alien_0['y_position'] = 25
-print(alien_0)
-"""
-"""
-alien_0 = {}
-alien_0['color'] = 'green'
-alien_0['points'] = 5
-print(alien_0)
-"""
-"""
-#下面是修改字典里值的过程：
-alien_0 = {'color':'green','points':5}
-print(alien_0)
-alien_0['color'] = 'yellow'
-print(alien_0)
-"""
-"""
-alien_0 = {'x_position': 0,'y_position':25,'speed':'medium'}
-print(f"original position:{alien_0['x_position']}")
-if alien_0['speed'] == 'slow':
-    x_increment = 1
-elif alien_0['speed'] == 'medium':
-    x_increment = 2
-else:
-    x_increment = 3
-alien_0['x_position'] = alien_0['x_position'] + x_increment
-print(f"new position: {alien_0['x_position']}")
-"""
-"""
-#下面是删除键值对的过程：
-alien_0 = {'color':'green','points':5}
-print(alien_0)
-del alien_0['color']
-print(alien_0)
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-language = favorite_languages['sarah'].title()
-print(f"Sarah is favorite_languages is {language}.")
-"""
-"""
-#使用get()访问字典中的值，当指定的键不存在时，返回一个默认值，可以避免键值错误
-alien_0 = {'color':'green','speed':'slow'}
-point_alien = alien_0.get('point','no point value assigned')  # get()函数中，第一个值为要访问的键值，第二个值为当要访问的键值不存在时，返回的默认值
-print(point_alien)
+items = [
+    ('name','gumby'),
+    ('age',42)
+]
+d = dict(items)
+print(d)
 """
 """
 people = {
-    'first_name':'wang',
-    'last_name':'yu jia',
-    'city':'qinhuangdao',
-    'age':21,
-}
-print(people)
-"""
-"""
-num = {
-    'wang1':1,
-    'wang2':2,
-    'wang3':3,
-    'wang4':4,
-    'wang5':5,
-}
-print(num)
-"""
-"""
-zidian = {
-    'for':'用于循环',
-    'if':'用于循环，也可以用于判断列表是否为空列表',
-    'else':'用于if循环，在特殊情况下可以省略用elif代替',
-    'len':'用于统计列表长度',
-    'upper':'用于大写内容',
-}
-print(f"for:{zidian['for']} \n if:{zidian['if']} \n else:{zidian['else']} \n len:{zidian['len']} \n upper:{zidian['upper']}")
-"""
-""""
-#遍历字典的过程：当遍历字典时，默认遍历所有的键
-user_0 = {
-    'username':'efermi',
-    'first':'enrico',
-    'last':'fermi',
-}
-for key,value in user_0.items():  # items():包含字典名和方法,返回一个键值对列表，之后，for循环依次将每个键值对赋值给指定的两个变量
-    print(f"\n Key:{key}")
-    print(f"value:{value}")
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-for name,language in favorite_languages.items():
-    print(f"{name.title()}  favorite language is {language.title()}")
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-for name in favorite_languages.keys():  # keys():当在不需要使用字典中的值时，可以用keys()函数遍历字典中的键
-    print(name.title())
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-friends = ['phil','sarah']
-for name in favorite_languages:
-    print(f"hi,{name.title()}")
-    if name in friends:
-        language = favorite_languages[name].title()
-        print(f"\t {name.title()},i see you love {language}!")
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-if 'erin' not in favorite_languages.keys():  # keys()可以检查内容是否为字典中的键
-    print('erin,please take our poll!')
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-if 'eric' not in favorite_languages.keys():  # keys()可以返回一个列表，其中包含字典中所有的键
-    print("erin,please take our poll!")
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-for name in sorted(favorite_languages.keys()):  # 可以使用sorted()来获得按特定顺序排列的键列表的副本
-    print(f"{name.title()},thank you for taking the poll.")
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-print("the following languages have been mentioned:")
-for language in favorite_languages.values():  # value()可以返回一个值列表，不包含任何键
-    print(language.title())
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-print("the following languages have been mentioned:")
-for language in set(favorite_languages.values()):  # 集合set函数可以剔除重复项
-    print(language.title())
-"""
-"""
-dicts = {
-    'list':'列表',
-    'var':'变量',
-    'int':'整型',
-    'boolean':'布尔',
-    'str':'字符串',
-}
-for keys,value in dicts.items():
-    print(keys,value)
-"""
-"""
-places = {
-    "中国":"长江",
-    "埃及":"尼罗河",
-    "巴西":"亚马逊河",
-}
-for place, river in places.items():
-    print(f"the {river} runs through {place}")
-for river in places.values():  # values()函数：只打印内容
-    print(river)  # 打印河流名字
-for place in places.keys():  # keys()函数：只打印键
-    print(place)  # 打印国家名字
-"""
-"""
-favorite_languages = {
-    'jen':'python',
-    'sarah':'c',
-    'edward':'ruby',
-    'phil':'python',
-}
-invited_people = ['jen','sarah','wang']
-for name in invited_people:
-    if name in favorite_languages.keys():
-        print(f'{name.title()},thank you !')
-    else:
-        print(f'{name.title()},can you want get my invited ?')
-"""
-"""
-alien_0 = {'color':'green','point':5}
-alien_1 = {'color':'yellow','point':10}
-alien_2 = {'color':'red','point':15}
-aliens = [alien_0,alien_1,alien_2]
-for alien in aliens:
-    print(alien)
-"""
-"""
-aliens = []  # 创建一个用于存储外星人的空列表
-for alien_number in range(30):  # 创建30个外星人
-    new_alien = {'color':'green','point':5,'speed':'slow'}
-    aliens.append(new_alien)
-for alien in aliens[:5]:  # 显示前5个外星人
-    print(alien)
-print(len(aliens))
-"""
-"""
-aliens = []
-for alien_number in range(30):
-    new_alien = {'color':'green','point':5,'speed':'slow'}
-    aliens.append(new_alien)
-for alien in aliens[:3]:
-    if alien['color'] == 'green':
-        alien['color'] = 'yellow'
-        alien['speed'] = 'medium'
-        alien['point'] = 10
-for alien in aliens[:5]:
-    print(alien)
-"""
-"""
-aliens = []
-for alien_number in range(30):
-    new_alien = {'color':'green','point':5,'speed':'slow'}
-    aliens.append(new_alien)
-for alien in aliens[0:3]:
-    if alien['color'] == 'green':
-        alien['color'] = 'yellow'
-        alien['speed'] = 'medium'
-        alien['point'] = 10
-for alien in aliens[0:3]:
-    if alien['color'] == 'yellow':
-        alien['color'] = 'red'
-        alien['speed'] = 'fast'
-        alien['point'] = 15
-for alien in aliens[0:5]:
-    print(alien)
-"""
-"""
-pizza = {'crust': 'thick',
-         'toppings': ['mushrooms', 'extra cheese'],  # 可以在字典中存储一个列表
-         }
-print(pizza['crust'])
-print(f"\npizza['toppings']")
-for topping in pizza['toppings']:
-    print(topping)
-"""
-"""
-favorite_languages = {
-    'jen': ['python', 'ruby'],
-    'sarah': ['c'],
-    'edward': ['ruby', 'c'],
-    'phil': ['python', 'haskell'],
-}
-for name, languages in favorite_languages.items():
-    print(f"{name.title()} favorite languages are:")
-    for language in languages:
-     print(f"{language.title()}")
-"""
-"""
-favorite_languages = {
-    'jen': ['python', 'ruby'],
-    'sarah': ['c'],
-    'edward': ['ruby', 'c'],
-    'phil': ['python', 'haskell'],
-}
-for name, languages in favorite_languages.items():
-    if len(languages) == 1:
-        print(f"{name.title()} favorite language is")  # 加入一个判定条件，如果只有一个语言，那按单数语句输出
-    else:
-        print(f"{name.title()} favorite languages are:")
-    for language in languages:
-        print(f"{language.title()}")
-"""
-"""
-users = {
-    'aeinstein': {
-        'first': 'albert',
-        'lost': 'einstein',
-        'location': 'princeton',
+    'Alice':{
+        'phone':'2341',
+        'addr':'foo drive 23',
     },
-    'mcurie': {
-        'first': 'maire',
-        'lost': 'curie',
-        'location': 'paris',
+    'Beth':{
+        'phone':'9012',
+        'addr':'bar street 42',
+    },
+    'Cecil':{
+        'phone':'3158',
+        'addr':'baz avenue 90',
     },
 }
-for username, user_info in users.items():  # 遍历字典users，将每个键赋给变量username，同时将与当前键相关联的字典赋值给变量user_info
-    print(f"\nUsername:{username}")
-    fullname = f"{user_info['first'].title()} {user_info['lost'].title()}"  # 访问内部字典
-    location = user_info['location']
-    print(f"\tFull name:{fullname}")
-    print(f"\tLocation:{location.title()}")
-"""
-"""
-lisa = {
-    'first_name': 'li',
-    'last_name': 'chen',
-    'age': 18,
-    'city': 'nanchang',
+labels = {
+    'phone':'phone number',
+    'addr':'address',
 }
-mary = {
-    'first_name': 'wang',
-    'last_name': 'fang',
-    'age': 25,
-    'city': 'chengdu',
+name = input("Name:")
+request = input("phone number(p) or address(a)?")
+if request == 'p':
+    key = 'phone'
+elif request == 'a':
+    key = 'addr'
+
+if name in people:
+    print(f"{name}的{labels[key]}是{people[name][key]}")
+"""
+# 字典的基本操作:
+# len(d):返回字典d包含的键值对的数量
+# d[k]:返回与键k相关联的值
+# d[k] = v:将值v关联到键k
+# del d[k]:删除键为k的项
+# k in d:检查字典d是否包含键为k的项
+# 字典方法
+# clear()方法:删除所有的字典项
+"""
+d = {}
+d['name'] = 'Gumby'
+d['age'] = 42
+print(d)
+returned_value = d.clear()
+print(d)
+print(returned_value)
+"""
+# copy方法: 返回一个新字典，其包括的键值对与原来的字典相同  修改副本时会影响到原件
+# deepcopy方法:返回一个新字典，其包括的键值对与原来的字典相同 deepcopy()方法复制的字典在修改时不会影响到原件
+"""
+x = {
+    'username': 'admin',
+    'machines': ['foo', 'bar', 'baz'],
 }
-jack = {
-    'first_name': 'zhang',
-    'last_name': 'peng',
-    'age': 12,
-    'city': 'shanghai',
+y = x.copy()
+print(x)
+print(y)
+y['username'] = 'mlh'
+print(y)
+print(x)
+y['machines'].remove('foo')
+print(y)
+print(x)
+# 第三对输出与第二对输出表明，在copy()方法中，如果修改(不是替换)副本，则会影响到原件
+x = {
+    'username': 'admin',
+    'machines': ['foo', 'bar', 'baz'],
 }
-people = [lisa, mary, jack]  # 将字典存储于列表中时，字典名不需要加引号
-for peo in people:
-    print(peo)
-for peo in people:
-    print(f"name:{peo['first_name']}{peo['last_name']}")
-    print(f"age:{peo['age']}")
-    print(f"city:{peo['city']}")
+y = deepcopy(x)
+y['machines'].remove('foo')
+print(x)
+print(y)
+# 这对输出表明，在deepcopy方法中，修改副本不会影响到原件
+"""
+# fromkeys方法:返回具有指定键和值的字典
+# 包括两个参数
+# 第一个参数keys为必填，指定新字典的键,参数形式为列表形式,参数应包含在单引号中，多个参数用’,‘隔开
+# 第二个参数为value为选填，默认值为None,再指定特定值时，无论如何指定值，多个键都会指向同一个值
+"""
+i = dict.fromkeys(['name','age'])
+print(i)
 """
 """
-first = {
-    'zhonglei':'mao',
-    'zhuren':'wang',
-}
-second = {
-    'zhonglei':'eyu',
-    'zhuren':'wang2',
-}
-third = {
-    'zhonglei':'she',
-    'zhuren':'wang3'
-}
-pets = [first,second,third]
-for pet in pets:
-    print(f"zhonglei:{pet['zhonglei']}")
-    print(f"zhuren:{pet['zhuren']}")
+i = dict.fromkeys(['name','age'],['wyj','21'])
+print(i)
+"""
+# get()方法:当访问字典中没有的键时，返回none，当访问字典中存在的键时，返回键所对应的值
+# get()方法有两个参数
+# 第一个参数为访问的键，第二个键为当访问的键不存在时，返回的值
+"""
+d = {}
+i = d.get('name')
+print(i)
 """
 """
-favorite_places = {
-    'wang1': ['1', '2', '3'],
-    'wang2': ['4', '5', '6'],
-    'wang3': ['7', '8', '9'],
+d = {
+    'name': 'wyj',
+    'age': '21',
 }
-for name,places in favorite_places.items():
-    print(f"{name.title()}:{places}")
+i = d.get('age','none')
+print(i)
 """
 """
-cities = {
-    'hengshui': {
-        'country': 'zhongguo',
-        'population': 'shiwuwan',
-        'fact': 'jiaoyu',
+people = {
+    'Alice':{
+        'phone':'2341',
+        'addr':'foo drive 23',
     },
-    'qinhuangdao':{
-        'country':'zhongguo',
-        'population':'shisiwan',
-        'fact':'jiaoyuhao,'
+    'Beth':{
+        'phone':'9012',
+        'addr':'bar street 42',
     },
-    'beijing':{
-        'country':'zhongguo',
-        'population':'shiduowan',
-        'fact':'henfu',
+    'Cecil':{
+        'phone':'3158',
+        'addr':'baz avenue 90',
     },
 }
-for city,city_info in cities.items():  # 遍历字典时不要忘记.items()
-    print(f"name:{city}")
-    print(f"国家:{city_info['country']}")
-    population = city_info['population']
-    print(f"人口:{population}")
-    fact = city_info['fact']
-    print(f"事实:{fact}")
-"""
-# 第七章:用户输入和while循环
-"""
-message = input("tell me something,and i will repeat it back to you:")
-# input()让程序暂停运行，等待用户输入一些文本，获取输入后，将其赋值给一个变量
-print(message)
-"""
-"""
-name = input("please enter your name:")
-print(f"hello,{name}!")
-"""
-"""
-prompt = "if you tell us who you are,we can personalize the messages you see"
-prompt += "\nwhat is your first name?"
-name = input(prompt)
-# 可以将提示赋值给一个变量a，再将该变量a传递给函数input()
-print(f"\nhello,{name}")
-"""
-"""
-age = input("how old are you?")
-age = int(age)  # int()函数将用户的输入视为数值,在不使用int()函数的情况下，用户输入为字符串，不能作为数字使用
-if age < 4 :
-    print('free')
-elif 4 <= age < 18:
-    print('25')
-elif 18 <= age < 65:
-    print('40')
-else:
-    print('20')
-"""
-"""
-height = input("how tall are you,in inches?\n")
-height = int(height)
-if height >= 48:
-    print('收费')
-else:
-    print('不收费')
-"""
-"""
-number = input("enter a number,and i can tell you if it is even or odd:\n")
-number = int(number)
-if number % 2 == 0:  # %：求模运算，即求余数，如果一个数可以被另一个数整除，则返回值为0，否则，返回余数
-    print(f"{number} is even")
-else:
-    print(f"{number} is odd")
-"""
-"""
-car = input('what car would you like?\n')
-print(f"let me see if i can find a {car.title()}")
-"""
-"""
-number = input("你有多少人就餐？\n")
-number = int(number)
-if number >= 8:
-    print("没座")
-else:
-    print("有座")
-"""
-"""
-number = input()
-number = int(number)
-if number % 10 == 0:
-    print(f"{number}是10的整数倍")
-else:
-    print(f"{number}不是10的整数倍")
-"""
-# while循环  while循环语句格式: while (表达式):    当表达式为真时，执行下面的语句，如果表达式为假，则跳出循环
-#                               {
-#                                   语句
-#                               }
-"""
-current_number = 1
-while current_number <= 5:
-    print(current_number)
-    current_number += 1
-"""
-"""
-prompt = "\ntell me something,and i will repeat it back to you:"
-prompt += "\n enter 'quit' to end the program \n"
-message = ""  # 创建变量message，用于记录输入的值
-while message != 'quit':
-    message = input(prompt)
-    if message != 'quit':
-        print(message)
-"""
-"""
-prompt = "\ntell me something,and i will repeat it back to you:"
-prompt += "\n enter 'quit' to end the program \n"
-active = True
-while active:
-    message = input(prompt)
-    if message == 'quit':
-        active = False
-    else:
-        print(message)
-"""
-# break语句使用
-"""
-prompt = "\nplease enter the name of city you have visited:"
-prompt += "\nenter 'quit' when you are finished \n"
-while True:  # 以while True开头的循环，如果没有遇到break语句，将不断运行
-    city = input(prompt)
-    if city == 'quit':
-        break  # break语句可以立即推出while循环，用于控制程序流程
-    else:
-        print(f"i would love to go to {city.title()}")
-"""
-# continue语句使用  与break语句不同的是，可以根据条件测试结果决定是否继续执行循环
-"""
-current_number = 0
-while current_number < 10:
-    current_number += 1
-    if current_number % 2 == 0:
-        continue  # 当if语句为真时，执行continue语句，忽略后面的语句并返回循环的开头
-    print(current_number)
-"""
-"""
-prompt = "\n输入一系列pizza配料:"
-prompt += "\n当你完成pizza配料时请输入'quit' \n"
-active = True
-while active:
-    peiliao = input(prompt)
-    if peiliao == 'quit':
-        active = False
-    else:
-        print(f"我们将添加{peiliao}到你的pizza中")
-"""
-"""
-message = "请告知你的年龄："
-while True:
-    age = input(message)
-    age = int(age)
-    if int(age) < 3:
-        print("free")
-        continue
-    elif 3 <= int(age) < 12:
-        print("10")
-        continue
-    elif int(age) >= 12:
-        print("15")
-        continue
-"""
-"""
-message = "请告知你的年龄："
-active = True
-while active:
-    age = input(message)
-    if age == 'quit':  
-        break
-    elif int(age) < 3:
-        print("free")
-        continue
-    elif 3 <= int(age) < 12:
-        print("10")
-        continue
-    elif int(age) >= 12:
-        print("15")
-        continue
-"""
-"""
-i = 1  # 一个无限循环的while循环
-active = True
-while active:
-    i = i+1
-    print(i)
-"""
-# 在列表中使用while循环
-"""
-unconfirmed_users = ['alice','brain','candace']
-confirmed_users = []
-while unconfirmed_users:  # while循环不断运行，直到目标列表为空
-    current_user = unconfirmed_users.pop()
-    print(f"verifying user: {current_user.title()}")
-    confirmed_users.append(current_user)
-print(f"\nthe following users have been confirmed:")
-for confirmed_user in confirmed_users:
-    print(confirmed_user.title())
-"""
-# 利用while循环删除为特定值的所有列表元素
-"""
-pets = ['dog','cat','dog','goldfish','cat','rabbit','cat']
-print(pets)
-while 'cat' in pets:
-    pets.remove('cat')
-print(pets)
-"""
-"""
-# 利用while循环使用用户输入填充字典
-responses = {}  # 建立一个空字典responses
-polling_active = True  # 设置一个while循环的标志
-while polling_active:
-    name = input("\nwhat is your name?\n")
-    response = input("which mountain would you like to climb today?\n")
-    responses[name] = response  # 将回答存储于字典中
-    repeat = input("would you like to let another person respond?(yes/no)\n")
-    if repeat == 'no':
-        polling_active = False
-print("\n--poll results--")
-print(responses)  # 顺便打印一下字典
-for name,response in responses.items():
-    print(f"{name} would like to climb {response}")
-"""
-"""
-sandwich_orders = ['1','2','3','4']
-finished_sandwiches = []
-while sandwich_orders:
-    finished_sandwiche = sandwich_orders.pop()
-    finished_sandwiches.append(finished_sandwiche)
-    print(f"i made your {finished_sandwiche}")
-"""
-"""
-print("店里的五香烟熏牛肉卖完了")
-sandwich_orders = ['1','2','3','pastrami','pastrami','pastrami']
-while 'pastrami' in sandwich_orders:
-    sandwich_orders.remove('pastrami')
-print(sandwich_orders)
-"""
-"""
-shengdi = {}
-active = True
-while active:
-    name = input("\nwhat is your name?\n")
-    place = input("\nwhere would you want to visit?\n")
-    shengdi[name] = place
-    respeat = input("would you like to let another person respond?(yes/no)\n")
-    if respeat == 'no':
-        break
-print("\n--poll results--")
-for name, place in shengdi.items():
-    print(f"{name} want to {place}")
-"""
-
-# 第八章 函数
-# 定义函数
-'''
-def greet_user():  # 在python中，创建函数使用关键字def，创建函数的格式为：def 函数名(完成任务所需要的信息):
-    """显示简单的问候语"""
-    print("hello!")  # 指出函数所需要进行的工作
-
-
-greet_user()
-'''
-# 向函数传递信息
-"""
-def greet_user(username):  # 当调用函数时，需要赋值给username  其中，”uesrname“为形参，即函数完成工作所需要的信息
-    print(f"hello!{username.title()}")
-
-
-greet_user('jesse')  # “jesse”为实参，即调用函数时传递给函数的信息  在调用函数时，应将形参置于圆括号中
-"""
-"""
-def display_message():
-    print(f"这一章学习函数的相关知识")
-
-
-display_message()
-"""
-"""
-def favorite_book(title):
-    print(f"one of my favorite book is {title.lower()}")
-
-
-favorite_book('alice in wonderland')
-"""
-# 位置实参
-"""
-def describe_pet(animal_type, pet_name): 
-    print(f"\ni have a {animal_type}")
-    print(f"\n my {animal_type} name is {pet_name}")
-# 在调用语句describe_pet('she','wyj')中，‘she’被赋值给‘animal_type’,'wyj'被赋值给'pet_name'
-                                    # 函数调用时，实参的顺序应与函数定义中的形参的顺序一致
-
-describe_pet('she', 'wyj')
-"""
-# 多次调用函数
-"""
-def describe_pet(animal_type, pet_name):
-    print(f"\ni have a {animal_type}")
-    print(f"\n my {animal_type} name is {pet_name}")
-
-
-describe_pet('she', 'wyj')
-describe_pet('dog', 'dillie')
-"""
-# 关键字实参  使用关键字实参时，可以不考虑函数调用中实参的顺序.  当使用关键字形参时，应准确指定函数定义中的形参名
-"""
-def describe_pet(animal_type, pet_name):
-    print(f"\ni have a {animal_type}")
-    print(f"my {animal_type} name is {pet_name}")
-
-
-describe_pet(                 # 此处语句等效于：describe_pet(
-    animal_type='hamster',                      pet_name='harry',
-    pet_name='harry'                            animal_type='hamster'
-)                                            ) 即为关键字实参是顺序无关紧要
-"""
-# 默认值  可以给形参指定默认值，如果在函数调用的过程中没有实参输入，则使用形参的默认值
-"""
-def describe_pet(pet_name, animal_type='dog'):
-    print(f"\ni have a {animal_type}")
-    print(f"\nmy {animal_type} name is {pet_name}")
-
-
-describe_pet('she')  # 此处语句可以等价为：describe_pet(pet_name='she')
-"""
-# 有默认值的形参被赋予实参时的示例
-"""
-def describe_pet(pet_name, animal_type='dog'):
-    print(f"\ni have a {animal_type}")
-    print(f"\nmy {animal_type} name is {pet_name}")
-
-
-describe_pet('she','little dog')  # 当函数调用时，有默认值的形参被赋予了实参，运行结果将表示实参而不是默认值
-"""
-
-# 避免实参错误
-# 实参错误内容：Traceback(most recent call last)
-"""
-def make_shirt(chima, ziyang):  # 关键字实参调用函数
-    print(f"这件{chima}大的T恤是印有{ziyang}的字样")
-
-
-make_shirt(
-    chima='175',
-    ziyang='我爱你'
-)
-"""
-"""
-def make_shirt(chima, ziyang):  # 位置实参调用函数
-    print(f"这件{chima}大的T恤是印有{ziyang}的字样")
-
-
-make_shirt('175','我爱你')
-"""
-"""
-def make_shirt(chima, ziyang='i love python'):
-    print(f"这件{chima}大的T恤印有{ziyang}的字样")
-
-
-make_shirt('175')  # 印有默认字样的大号T恤
-make_shirt('165')  # 印有默认字样的中号T恤
-make_shirt('155','我爱你')  # 印有‘我爱你’字样的小号T恤
-"""
-
-"""
-def descrbie_city(chengshi, guojia='中国'):
-    print(f"{chengshi} is in {guojia}")
-
-
-descrbie_city('beijing')
-descrbie_city('niuyue')
-descrbie_city('hengshui')
-"""
-
-# 返回值  函数返回的值为返回值，可使用return语句将值返回调用函数的代码行
-# 返回简单值
-"""
-def get_formatted_name(first_name, last_name):
-    full_name = f"{first_name} {last_name}"
-    return full_name.title()  # 将内容按要求转换，并将结果返回到函数调用行 
-
-
-musician = get_formatted_name('jimi', 'hendrix')  # 需要提供一个变量以便将返回值的值赋给变量
-print(musician)
-"""
-
-# 让实参变为可选项
-"""
-def get_formatted_name(first_name, middle_name, last_name):
-    full_name = f"{first_name} {middle_name} {last_name}"
-    return full_name.title()
-
-
-musician = get_formatted_name('john', 'lee', 'hooker')
-print(musician)
-"""
-"""
-def get_formatted_name(first_name, last_name, middle_name=''):  # 默认形参应在非默认形参之后
-    full_name = f"{first_name} {middle_name} {last_name}"
-    return full_name.title()
-
-
-musician = get_formatted_name('john',  'hooker')
-print(musician)
-"""
-
-# 返回字典
-"""
-def build_person(first_name, last_name):
-    person = {
-        'first': first_name,
-        'last': last_name,
-    }
-    return person
-
-
-musician = build_person('jimi', 'hendrix')
-print(musician)
-"""
-"""
-def build_person(first_name, last_name,age=None):
-    person = {
-        'first': first_name,
-        'last': last_name,
-    }
-    if age:
-    person['age'] = age
-    return person
-
-
-musician = build_person('jimi', 'hendrix',age=27)
-print(musician)
-"""
-
-# 结合使用函数和while循环
-"""
-def get_formatted_name(first_name, last_name,medium=''):
-    full_name = f"{first_name} {last_name} {medium}"
-    return full_name.title()
-
-
-while True:
-    print(f"\nplease tell me your name:")
-    print("(enter 'q' at any time to quit)")
-    f_name = input("First name:")
-    if f_name == 'q':
-        break
-    m_name = input("Medium name:")
-    if m_name == 'q':
-        break
-    l_name = input("Last name:")
-    if l_name == 'q':
-        break
-    formatted_name = get_formatted_name(f_name,m_name,l_name)
-    print(formatted_name)
-"""
-
-"""
-def city_country(city, country):
-    ims = f"{city} {country}"
-    return ims.title()
-
-
-print(city_country('santiago', 'chile'))
-print(city_country('hengshui', 'china'))
-print(city_country('shijiang', 'china'))
-"""
-"""
-def make_album(singers,songs,num=None):
-    album = {
-        'singer':singers,
-        'song':songs,
-    }
-    if num:
-        album['num'] = num
-    return album
-
-
-ims = make_album('zjl','daoxiang',6)
-print(ims)
-ims = make_album('cyz','shinian',6)
-print(ims)
-ims = make_album('wyj','7777',6)
-print(ims)
-"""
-"""
-def make_album(singers,songs,num=None):
-    album = {
-        'singer':singers,
-        'song':songs,
-    }
-    if num:
-        album['num'] = num
-    return album
-
-
-active = True
-while active:
-    singer = input()
-    if singer == 'q':
-        break
-    song = input()
-    if song == 'q':
-        break
-    yn = input()
-    if yn == 'no':
-        active = False
-    ims = make_album(singer,song)
-    print(ims)
-"""
-
-# 传递列表:在函数调用的过程中，列表名可以作为实参调用，此时，函数可以直接访问列表中的内容
-"""
-def greet_users(names):
-    for name in names:
-        msg = f"hello,{name.title()}!"
-        print(msg)
-
-
-names = ['hannah', 'ty', 'margot']
-greet_users(names)  
-"""
-# 在函数中修改列表
-"""
-def print_models(unprinted_designs,completed_modesls):
-    while unprinted_designs:
-        current_design = unprinted_designs.pop()
-        print(f"printing models:{current_design}")
-        completed_modesls.append(current_design)
-def show_completed_models(completed_models):
-    print("\nthe following models have been printed:")
-    for completed_model in completed_models:
-        print(completed_model)
-
-
-unprinted_designs = ['phone case','robot pendant','dodecahedron']
-completed_models = []
-print_models(unprinted_designs,completed_models)
-show_completed_models(completed_models)
-"""
-
-# 禁止函数修改列表
-"""
-def print_models(unprinted_designs, completed_modesls):
-    while unprinted_designs:
-        current_design = unprinted_designs.pop()
-        print(f"printing models:{current_design}")
-        completed_modesls.append(current_design)
-
-
-def show_completed_models(completed_models):
-    print("\nthe following models have been printed:")
-    for completed_model in completed_models:
-        print(completed_model)
-
-
-unprinted_designs = ['phone case', 'robot pendant', 'dodecahedron']
-completed_models = []
-print_models(unprinted_designs[:], completed_models)
-show_completed_models(completed_models)
-print(unprinted_designs)
-print(completed_models)
-"""
-
-"""
-def show_messages(news):
-    for new in news:
-        print(new)
-
-
-img = ['1', '2', '3']
-show_messages(img)
-"""
-"""
-def send_messages(show_messages,sent_messages):
-    while show_messages:
-        message = show_messages.pop()
-        sent_messages.append(message)
-
-
-show_messages = ['1','2','3']
-sent_messages = []
-send_messages(show_messages,sent_messages)
-print(show_messages)
-print(sent_messages)
-"""
-"""
-def send_messages(show_messages,sent_messages):
-    while show_messages:
-        message = show_messages.pop()
-        sent_messages.append(message)
-
-
-show_messages = ['1','2','3']
-sent_messages = []
-send_messages(show_messages[:],sent_messages)
-print(show_messages)
-print(sent_messages)
-"""
-
-# 传递任意数量的形参  *形参名:创建一个”形参名“的空元组，并将收到的所有值都封装到这个元组中
-"""
-def make_pizza(*toppings):
-    print(toppings)
-
-
-make_pizza('pepperoni')
-make_pizza('mushrooms', 'green peppers', 'extra cheese')
-"""
-"""
-def make_pizza(*toppings):
-    print(f"\nmaking a pizza with the following toppings:")
-    for topping in toppings:
-        print(f"-{toppings}")
-
-
-make_pizza('pepperoni')
-make_pizza('mushrooms', 'green peppers', 'extra cheese')
-"""
-# 结合使用位置实参和任意数量实参
-"""
-def make_pizza(size,*toppings):
-    print(f"\nmaking a {size}-pizza with the following toppings:")
-    for topping in toppings:
-        print(f"-{toppings}")
-
-
-make_pizza(16,'pepperoni')
-make_pizza(16,'mushrooms', 'green peppers', 'extra cheese')
-"""
-
-# 使用任意数量的关键字实参
-"""
-def build_profile(first, last, **user_info):  # **形参名:创建一个以”形参名“为名的字典
-    user_info['first'] = first
-    user_info['last'] = last
-    return user_info
-
-
-user_profile = build_profile('albert', 'einstein', location='princeton', field='physics')
-print(user_profile)
-"""
-"""
-def sanmingzhi(*shicais):
-    for shicai in shicais:
-        print(f"{shicai}")
-
-
-sanmingzhi('1')
-sanmingzhi('1','2')
-sanmingzhi('1','2','3')
-sanmingzhi('1','2','3','4')
-"""
-
-"""
-def build_profile(first, medium, last, **user_info):
-    user_info['first'] = first
-    user_info['medium'] = medium
-    user_info['last'] = last
-    return user_info
-
-
-user_profile = build_profile('wang', 'yu', 'jia', location='qinhuangdao', field='physics')
-print(user_profile)
-"""
-
-"""
-def build(zhizhaoshang, xinghao, **qita):
-    qita['zhizhaoshang'] = zhizhaoshang
-    qita['xinghao'] = xinghao
-    return qita
-
-
-xinxi = build('audi', 'RS7', color='blick', tow_package=True)
-print(xinxi)
-"""
-# 将函数存储在模块中
-# 将函数存储在称为”模块“的独立文件中，再使用“import”语句将模块导入到主程序中
-# 导入整个模块
-"""
-import mokuai  # 在此处，import语句导入了外部创建的pizza模块文件中的make_pizza()函数
-
-mokuai.make_pizza(16, 'pepperoni')  # 调用模块中函数的语句:module_name.function_name()
-mokuai.make_pizza(16, 'mushrooms', 'green peppers', 'extra cheese')
-"""
-# 导入特定的函数:from module_name import function_name//可根据需要从模块中导入任意数量的函数
-"""
-from mokuai import make_pizza
-
-make_pizza(16,'pepperoni')
-make_pizza(16,'mushrooms','green peppers','extra cheese')
-"""
-# 当导入的函数名过长或与程序中现有的名称冲突时，可以使用“as”指定简短的别名:from module_name import function_name as fn
-"""
-mp(16,'pepperoni')
-mp(16,'mushrooms','green peppers','extra cheese')
-"""
-# 同时，”as”也可以给模块指定别名:import module_name as mn
-"""
-import mokuai as m
-
-m.make_pizza(16, 'pepperoni')
-m.make_pizza(16, 'mushrooms', 'green peppers', 'extra cheese')
-"""
-# 导入模块中所有函数:from module_name import * ‘*’ 可以导入模块中所有函数
-"""
-from mokuai import *
-make_pizza(16,'pepperoni')
-make_pizza(12,'mushrooms','green peppers','extra cheese')
-"""
-"""
-from mokuai import print_models as pm
-unprinted_models = ['phone case','robot pendant','dodecahedron']
-completed_models = []
-pm(unprinted_models,completed_models)
-print(unprinted_models)
-print(completed_models)
-"""
-
-# 第九章 类
-# 类的使用方法:
-# 对类进行实例化:实例名 = 类名
-# 使用类中的值:实例名.属性
-# 使用类中的函数:实例名.方法名(参数列表)
-# 创建和使用类
-'''
-class dog:  # 定义了一个名为dog的类  定义类的格式:class 类名
-    """--一次模拟小狗的简单尝试--"""  # 描述这个类的功能
-
-    def __init__(self, name, age):
-        # 类中的函数成为方法。即方法本质也是一种函数
-        # 在方法中，形参self必不可少且位于其他形参前面
-        # 在调用这个方法创建实例时，每个与实例相关联的方法调用都自动传递实参self
-        # self是一个指向实例本身的引用，让实例能够访问类中的属性和方法
-        """--初始化属性name和age--"""
-        self.name = name
-        self.age = age
-        # 以self为前缀的变量可供类中所有的方法使用，可以通过类的任何实例访问
-
-    def sit(self):
-        """模拟小狗收到命令时蹲下"""
-        print(f"{self.name} is now sitting")
-
-    def roll_over(self):
-        """模拟小狗收到命令时打滚"""
-        print(f"{self.name} rolled over")
-'''
-
-# 根据类创建实例
-'''
-class dog:
-    """--一次模拟小狗的简单尝试--"""
-
-    def __init__(self, name, age):
-        """--初始化属性name和age--"""
-        self.name = name
-        self.age = age
-
-    def sit(self):
-        """模拟小狗收到命令时蹲下"""
-        print(f"{self.name} is now sitting")
-
-    def roll_over(self):
-        """模拟小狗收到命令时打滚"""
-        print(f"{self.name} rolled over")
-
-
-my_dog = dog('willie', 6)  # 此处语句访问了类dog中的属性
-your_dog = dog('lucy',3)  # 此处语句创建了第二个实例your_dog，同时也访问了类dog中属性
-my_dog.sit()
-my_dog.roll_over()
-# 此处语句调用了类dog中的方法
-# 调用方法需要指定实例的名称和要调用的方法，并用'.'间隔
-your_dog.sit()
-your_dog.roll_over()
-# 创建的第二个实例调用了类dog中的方法
-print(f"my dog name is {my_dog.name}")
-print(f"my dog is {my_dog.age} years old")
-print(f"your dog name is {your_dog.name}")
-print(f"your dog is {your_dog.age} years old")
-'''
-
-"""
-class Restaurant:
-    def __init__(self, restaurant_name, cuisine_type):
-        self.restaurant_name = restaurant_name
-        self.cuisine_type = cuisine_type
-
-    def describe_restaurant(self):
-        print(f"{self.restaurant_name} {self.cuisine_type}")
-
-    def open_restaurant(self):
-        print(f"{self.restaurant_name} is opening")
-
-
-restaurant = Restaurant('wyj', '111')
-print(f"{restaurant.restaurant_name} {restaurant.cuisine_type}")
-restaurant.describe_restaurant()
-restaurant.open_restaurant()
-restaurant = Restaurant('ddd','222')
-restaurant.describe_restaurant()
-restaurant = Restaurant('zzz','333')
-restaurant.describe_restaurant()
-restaurant = Restaurant('aaa','444')
-restaurant.describe_restaurant()
-"""
-
-"""
-class User:
-    def __init__(self, first_name, last_name):
-        self.first_name = first_name
-        self.last_name = last_name
-
-    def describe_user(self):
-        print(f"{self.first_name} {self.last_name}")
-
-    def greet_user(self):
-        print(f"mr/miss.{self.first_name}，how are you")
-
-
-user = User('wang', 'yujia')
-user.describe_user()
-user.greet_user()
-user = User('ddd', 'www')
-user.describe_user()
-user.greet_user()
-user = User('www','aaa')
-user.describe_user()
-user.greet_user()
-"""
-
-# 使用类和实例
-# 由于修改属性的值注释符太多，迫不得已开一个新的文件存放这一次的实例
-'''
-class Restaurant:
-    def __init__(self, restaurant_name, cuisine_type):
-        self.restaurant_name = restaurant_name
-        self.cuisine_type = cuisine_type
-        self.number_served = 0
-
-    def describe_restaurant(self):
-        print(f"{self.restaurant_name} {self.cuisine_type}")
-
-    def open_restaurant(self):
-        print(f"{self.restaurant_name} is opening")
-
-    def read_served(self):
-        print(f"有{self.number_served}人在这里就餐")
-
-    def set_number_server(self, number):
-        self.number_served = number
-
-    def increment_number_server(self, number):
-        self.number_served += number
-
-
-restaurant = Restaurant('www', 'ddd')
-restaurant.describe_restaurant()
-restaurant.open_restaurant()
-"""restaurant.number_served = 23
-restaurant.read_served()
-restaurant.set_number_server(23)
-restaurant.read_served()"""
-restaurant.increment_number_server(23)
-restaurant.read_served()
-'''
-
-"""
-class User:
-    def __init__(self, first_name, last_name):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.login_attempts = 0
-
-    def describe_user(self):
-        print(f"{self.first_name} {self.last_name}")
-
-    def greet_user(self):
-        print(f"mr/miss.{self.first_name}，how are you")
-
-    def increment_login_attempts(self, number):
-        self.login_attempts = number + 1
-        print(f"={self.login_attempts}")
-
-    def reset_login_attempts(self):
-        self.login_attempts = 0
-        print(f'={self.login_attempts}')
-
-
-user = User('wang', 'yujia')
-user.increment_login_attempts(0)
-user.reset_login_attempts()
-"""
-
-# 继承  在继承中，当一个类继承另一个类时，被继承的类为父类，继承的类为子类，子类继承了父类所有的属性和方法，同时还可以定义自己的属性和方法
-# 在子类中，属性和方法应为子类内容特有的内容
-# 子类的方法__init__()
-"""
-class Car:
-    def __init__(self, make, model, year):
-        self.make = make
-        self.model = model
-        self.year = year
-        self.odometer_reading = 0
-
-    def get_descriptive_name(self):
-        long_name = f"{self.year} {self.make} {self.model}"
-        return long_name.title()
-
-    def read_odometer(self):
-        print(f"this car has {self.odometer_reading} mile on it")
-
-    def update_odometer(self, mileage):
-        if mileage >= self.odometer_reading:
-            self.odometer_reading = mileage
-        else:
-            print("you can not roll back an odometer!")
-
-    def increment_odometer(self, miles):
-        self.odometer_reading += miles
-
-# 创建子类时，父类必须包含在当前的文件夹中，同时要位于子类前面
-class ElectricCar(Car):  # 定义子类时应在圆括号‘()’中指定父类的名称
-    def __init__(self, make, model, year):
-        super().__init__(make, model, year)  # super()函数:可以调用父类中的方法__init__()
-
-
-my_tesla = ElectricCar('tesla', 'model s', '2019')
-print(my_tesla.get_descriptive_name())
-"""
-
-# 给子类定义
-"""
-class Car:
-    def __init__(self, make, model, year):
-        self.make = make
-        self.model = model
-        self.year = year
-        self.odometer_reading = 0
-
-    def get_descriptive_name(self):
-        long_name = f"{self.year} {self.make} {self.model}"
-        return long_name.title()
-
-    def read_odometer(self):
-        print(f"this car has {self.odometer_reading} mile on it")
-
-    def update_odometer(self, mileage):
-        if mileage >= self.odometer_reading:
-            self.odometer_reading = mileage
-        else:
-            print("you can not roll back an odometer!")
-
-    def increment_odometer(self, miles):
-        self.odometer_reading += miles
-
-
-class ElectricCar(Car):
-    def __init__(self, make, model, year):
-        super().__init__(make, model, year)
-        self.battery_size = 75
-
-    def describe_battery(self):
-        print(f"this car has a {self.battery_size}-kwh battery")
-
-
-my_tesla = ElectricCar('tesla', 'model s', '2019')
-print(my_tesla.get_descriptive_name())
-my_tesla.describe_battery()
-"""
-# 重写父类的方法
-"""
-class Car:
-    def __init__(self, make, model, year):
-        self.make = make
-        self.model = model
-        self.year = year
-        self.odometer_reading = 0
-
-    def get_descriptive_name(self):
-        long_name = f"{self.year} {self.make} {self.model}"
-        return long_name.title()
-
-    def read_odometer(self):
-        print(f"this car has {self.odometer_reading} mile on it")
-
-    def update_odometer(self, mileage):
-        if mileage >= self.odometer_reading:
-            self.odometer_reading = mileage
-        else:
-            print("you can not roll back an odometer!")
-
-    def increment_odometer(self, miles):
-        self.odometer_reading += miles
-
-
-class ElectricCar(Car):
-    def __init__(self, make, model, year):
-        super().__init__(make, model, year)
-        self.battery_size = 75
-
-    def describe_battery(self):
-        print(f"this car has a {self.battery_size}-kwh battery")
-
-    def fill_gas_tank(self):
-        print("this car does not need a gas tank!")
-
-
-my_tesla = ElectricCar('tesla', 'model s', '2019')
-print(my_tesla.get_descriptive_name())
-my_tesla.describe_battery()
-my_tesla.fill_gas_tank()
-"""
-
-# 将实例用作属性
-"""
-class Car:
-    def __init__(self, make, model, year):
-        self.make = make
-        self.model = model
-        self.year = year
-        self.odometer_reading = 0
-
-    def get_descriptive_name(self):
-        long_name = f"{self.year} {self.make} {self.model}"
-        return long_name.title()
-
-    def read_odometer(self):
-        print(f"this car has {self.odometer_reading} mile on it")
-
-    def update_odometer(self, mileage):
-        if mileage >= self.odometer_reading:
-            self.odometer_reading = mileage
-        else:
-            print("you can not roll back an odometer!")
-
-    def increment_odometer(self, miles):
-        self.odometer_reading += miles
-
-
-class Battery:  # 定义了一个新类Battery
-    def __init__(self, battery_size=75):
-        self.battery_size = battery_size
-
-    def describe_battery(self):
-        print(f"this car has a {self.battery_size}-kwh battery")
-
-    def get_range(self):
-        if self.battery_size == '75':
-            range = 260
-        elif self.battery_size == '100':
-            range = 315
-
-    print(f"this car can go about {range} miles on a full charge")
-
-
-class ElectricCar(Car):
-    def __init__(self, make, model, year):
-        super().__init__(make, model, year)
-        self.battery = Battery()
-
-
-my_tesla = ElectricCar('tesla', 'model s', '2019')
-print(my_tesla.get_descriptive_name())
-my_tesla.battery.describe_battery()
-my_tesla.battery.get_range()
-"""
-
-# 模拟实物
-"""
-class Restaurant:
-    def __init__(self, restaurant_name, cuisine_type):
-        self.restaurant_name = restaurant_name
-        self.cuisine_type = cuisine_type
-        self.number_served = 0
-
-    def describe_restaurant(self):
-        print(f"{self.restaurant_name} {self.cuisine_type}")
-
-    def open_restaurant(self):
-        print(f"{self.restaurant_name} 正在营业")
-
-    def read_served(self):
-        print(f"有{self.number_served}人在这里就餐")
-
-    def set_number_server(self, number):
-        self.number_served = number
-
-    def increment_number_server(self, number):
-        self.number_served += number
-
-
-class IceCreamStand(Restaurant):
-    def __init__(self, restaurant_name, cuisine_type):
-        super().__init__(restaurant_name, cuisine_type)
-        self.flavors = ['草莓味', '苹果味', '原味奶油']
-
-    def describe_icecream(self):
-        print(f"本店有三种冰激凌:")
-        for flavor in self.flavors:
-            print(flavor)
-
-
-IceCreamStand = IceCreamStand('www', 'ddd')
-IceCreamStand.describe_icecream()
-"""
-
-"""
-class User:
-    def __init__(self, first_name, last_name):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.login_attempts = 0
-
-    def describe_user(self):
-        print(f"{self.first_name} {self.last_name}")
-
-    def greet_user(self):
-        print(f"mr/miss.{self.first_name}，how are you")
-
-    def increment_login_attempts(self, number):
-        self.login_attempts = number + 1
-        print(f"={self.login_attempts}")
-
-    def reset_login_attempts(self):
-        self.login_attempts = 0
-        print(f'={self.login_attempts}')
-
-
-class Admin(User):
-    def __init__(self, first_name, last_name):
-        super().__init__(first_name, last_name)
-        self.privileges = ['can add post', 'can delete post', 'can ban user']
-
-    def show_privileges(self):
-        for privilege in self.privileges:
-            print(f"管理员有{privilege}权限")
-
-
-Ad = Admin('www', 'sss')
-Ad.show_privileges()
-"""
-
-"""
-class User:
-    def __init__(self, first_name, last_name):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.login_attempts = 0
-
-    def describe_user(self):
-        print(f"{self.first_name} {self.last_name}")
-
-    def greet_user(self):
-        print(f"mr/miss.{self.first_name}，how are you")
-
-    def increment_login_attempts(self, number):
-        self.login_attempts = number + 1
-        print(f"={self.login_attempts}")
-
-    def reset_login_attempts(self):
-        self.login_attempts = 0
-        print(f'={self.login_attempts}')
-
-
-class Privileges:
-    def __init__(self, privileges=[]):
-        self.privileges = ['can add post', 'can delete post', 'can ban user']
-
-    def show_privileges(self):
-        for privilege in self.privileges:
-            print(f"管理员有{privilege}权限")
-
-
-class Admin(User):
-    def __init__(self, first_name, last_name):
-        super().__init__(first_name, last_name)
-        self.privileges = Privileges()
-
-
-vip_user = Admin('www', 'zzz')
-vip_user.privileges.show_privileges()
-"""
-
-"""
-class Car:
-    def __init__(self, make, model, year):
-        
-        self.make = make
-        self.model = model
-        self.year = year
-        self.odometer_reading = 0
-        self.miles = 0
-
-    def get_desprective_name(self):
-        
-        long_name = str(self.year) + ' ' + self.make + ' ' + self.model
-        return long_name.title()
-
-    def read_odometer(self):
-        
-        print("This car has " + str(self.odometer_reading) + " miles on it.")
-
-    def update_odometer(self, mileage):
-        
-        if mileage >= self.odometer_reading:
-            self.odometer_reading = mileage
-        # 将里程值存储在odometer_reading中
-        else:
-            print("You can't roll back an odometer!")
-
-    def increment_odometer(self, miles):
-       
-        if miles >= self.miles:
-            self.odometer_reading += miles
-        else:
-            print("You can't add the miles which is negative number!")
-
-    def fill_gas_tank(self):
-        print("This car have a  gas tank")
-
-
-class Battery:
-
-    def __init__(self, battery_size=70):
-
-        self.battery_size = battery_size
-
-    def describe_battery(self):
-
-        print("This car has a " + str(self.battery_size) + "-kwh battery.")
-
-    def get_range(self):
-
-        if self.battery_size == 70:
-            range = 240
-        elif self.battery_size == 85:
-            range = 270
-        message = "This car can go approximately " + str(range)
-        message += " miles on a full charge."
-        print(message)
-
-    def upgrade_battery(self):
-        if self.battery_size != 85:
-            self.battery_size = 85
-"""
-# 导入类
-# 导入单个类  在同一个文件夹中创建了一个Car.py，其内容为定义一个类，类名为Car
-"""
-form car import Car
-
-my_car_ = Car('audi','a4','2019')
-print(my_new_Car.get_descriptive_name())
-
-my_new_car.odometer.reading = 23
-my_new_car.read.odometer()
-"""
-# 在一个模块中存储多个类
-"""
-from car import ElectricCar
-my_tesla = ElectricCar('tesla','model s','2019')
-
-print(my_tesla.get_desriptive_name())
-my_tesla.battery.describe_battery()
-my_tesla.battery.get.range()
-"""
-# 从一个模块中导入多个类
-"""
-from car import Car,ElectricCar
-
-my_beetle = Car('volkswagen','beetle',2019)
-print(my_beetle.get_descriptive_name())
-
-my_tesla = ElectricCar('tesla','roadster','2019)
-print(my_tesla.get_Descriptive_name())
-"""
-# 导入整个模块
-"""
-import car
-
-my_tesla = car.ElectricCar('tesla','roadster',2019)
-print（my_tesla.get_descriptive_name())
-"""
-# 导入模块中所有的类:from module_name import *
-# 在一个模块中导入另一个模块
-# 自定义工作流程
-"""
-from restaurant import Restaurant
-
-# 创建一个实例
-my_restaurant = Restaurant('Go Believe', 'steamed stuffed bun')
-# 打印多少人就餐过
-print(my_restaurant.number_served)
-"""
-"""
-from user import User, Privileges, Admin
-
-first_admin = Admin('Ac', 'Fun', 22, 'female')
-first_admin.privileges.show_privileges()
-
-"""
-"""
-from user import User
-from privileges import Privileges, Admin
-
-first_admin = Admin('Ac', 'Fun', 22, 'female')
-first_admin.privileges.show_privileges()
-
-"""
-# python标准库
-# random标准库
-"""
-from random import randint
-ims = randint(1,6)  # randint(a,b):生成一个位于a与b之间的随机数
-print(ims)
-"""
-"""
-from random import choice  # choice():将一个列表或者元组作为参数，随机返回其中一个元素
-players = ['charles','martina','michael','florence','eli']
-first_up = choice(players)
-print(first_up)
-"""
-"""
-from random import randint
-
-class Die:
-    def __init__(self, sides=6):
-        self.sides = sides
-
-    def roll_die(self):
-
-        active = True
-        i = 1
-        while active:
-            i = i + 1
-            if i >= 12:
-                break
-            else:
-                self.sides = randint(1, 6)
-                print(self.sides)
-
-
-shuzi = Die()
-shuzi.roll_die()
-"""
-"""
-from random import choice
-
-lists = ('1','2','3','4','5','6','7','8','9','0','a','b','c','d','e')
-first = choice(lists)
-second = choice(lists)
-third = choice(lists)
-fourth = choice(lists)
-print(f"{first}{second}{third}{fourth}为大奖")
-"""
-"""
-from random import choices
-def get_win_ticket(possibilities):
-    # 摇出中奖组合
-    win_ticket = []
-    while len(win_ticket) < 7:
-        pulled_item = choices(possibilities)
-        # 仅当摇出的数字不在组合中时才将其添加到组合中
-        if pulled_item not in win_ticket:
-            win_ticket.append(pulled_item)
-    return win_ticket
-
-
-def check_ticket(played_ticket, win_ticket):
-    # 检查彩票的每个数字或字母，只要有一个不在中奖组合中就返回False
-    for element in played_ticket:
-        if element not in win_ticket:
-            return False
-    return True
-
-
-def make_ticket(possibilities):
-    # 随机生成彩票
-    ticket = []
-    while len(ticket) < 7:
-        pulled_item = choices(possibilities)
-        if pulled_item not in ticket:
-            ticket.append(pulled_item)
-    return ticket
-
-
-possibilities = ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-                 'a', 'b', 'c', 'd', 'e','f','g','h','i','j','k','l',
-                 'm','n','o','p','q','r','s','t','u','v','w','x','y','z')
-win_ticket = get_win_ticket(possibilities)
-plays = 0
-won = False
-max_tires = 1000000
-while not won:
-    new_ticket = make_ticket(possibilities)
-    won = check_ticket(new_ticket,win_ticket)
-    plays += 1
-    if plays >= max_tires:
-        break
-    if won:
-        print("We have a winning ticket!")
-        print(f"Your ticket: {new_ticket}")
-        print(f"Winning ticket: {win_ticket}")
-        print(f"It only took {plays} tries to win!")
-    else:
-        print(f"Tried {plays} times, without pulling a winner. :(")
-        print(f"Your ticket: {new_ticket}")
-        print(f"Winning ticket: {win_ticket}")
-"""
-# 类编码风格:应采用驼峰命名法
-# 第十章 文件和异常
-# 异常:用于管理程序运行时出现的错误
-# 从文件中读取数据
-# 读取整个文件
-# open():接受一个参数，即为要打开的文件的名称
-# 关键字with:在不再需要访问文件后将其关闭
-"""
-with open('pi_digits.txt') as file_object:  # open():接受一个参数，即为要打开的文件的名称
- # 关键字with:在不再需要访问文件后将其关闭
-    contents = file_object.read()
-print(contents)
- # 并没有使用open()和close()来打开和关闭文件，如果在程序中过早的调用close()，会导致在需要使用文件时而文件已经关闭(即无法访问)
- # 即使在合适的时机调用close()，也有可能会因为程序存在bug而导致方法close()无法执行，文件将不会关闭
-"""
-"""
-with open('pi_digits.txt') as file_object:
-    contents = file_object.read()
-print(contents.rstrip())  # rstrip()删除了文件右边的空行
-                          # 同理，lstrip()删除文件左边的空行
-                          # strip()删除文件所有的空行
-"""
-# 文件路径
-# 当要打开的文件于程序所在文件不在一个文件夹中时，需要提供文件路径，到特定的位置去查找
-"""
-with open('text_files/filename.txt') as file_object:
-"""
-# 绝对文件路径:即文件的完整路径
-# 可以将绝对路径赋值给一个变量，再将该变量传递给open().可以简化open()语句
-"""
-file_path = '/home/ehmatthes/other_files/text_files/_filename_.txt'
-with open(file_path) as  file_object
-"""
-# 逐行读取
-"""
-filename = 'pi_digits.txt'
-with open(filename) as file_object:
-    for line in file_object:
-        print(line.strip())  # 逐行读取最后的print()括号内为‘line’
-"""
-# 创建一个包含文件各行内容的列表
-"""
-filename = 'pi_digits.txt'
-with open(filename) as file_object:
-    lines = file_object.readlines()  # 方法readlines():从文件中读取每一行，并将其存储在一个列表中
-
-for line in lines:
-    print(line.strip())
-"""
-"""
-filename = 'pi_digits.txt'
-with open(filename) as file_object:
-    lines = file_object.readlines()
-
-pi_string = ''  # 创建一个变量用于只想圆周率的值
-for line in lines:
-    pi_string += line.strip()
-# 使用一个循环，将隔行加入pi_string，并删除每行末尾的换行符
-print(pi_string)
-print(len(pi_string))
-# 挡在读取文本时，所有文本均为字符串
-# 当读取的为数且想作为数值使用，必须转化类型
-# int():整数型
- # float():浮点数
-"""
-# 包含一百万位的大型文件
-"""
-filename = 'pi_million_digits.txt'
-with open(filename) as file_object:
-    lines = file_object.readlines()
-
-pi_string = ''
-for line in lines:
-    pi_string += line.strip()
-
-print(f"{pi_string[:52]}...")  # 此处利用了列表分片，只显示前52位,第53位及以后用省略号代替
-print(len(pi_string))
-"""
-# 圆周率中包含你的生日吗
-"""
-filename = 'pi_million_digits.txt'
-with open(filename) as file_object:
-    lines = file_object.readlines()
-
-pi_string = ''
-for line in lines:
-    pi_string += line.strip()
-birthday = input("enter your birthday,in the form mmddyy:")
-if birthday in pi_string:
-    print("your birthday appears in the first million digits of pi!")
-else:
-    print("your birthday does not appear in the first million digits of pi")
-"""
-"""
-with open('pythonbj.txt') as file_object:
-    contents = file_object.read()
-print(contents)  # 第一次打印，读取整个文件
-"""
-"""
-with open('pythonbj.txt') as file_object:
-    lines = file_object.readlines()
-    for line in lines:
-        print(line)  # 第二次打印，遍历文件中的对象
-"""
-"""
-filename = 'pythonbj.txt'
-
-with open(filename) as file_object:
-    lines = file_object.readlines()
-
-pi_string = ''
-for line in lines:
-    pi_string += line.strip()
-
-print(pi_string)  # 第三次打印，将各行存储在一个列表中，再在with代码块外面打印
-"""
-"""
-filename = "pythonbj.txt"
-
-with open(filename) as file_object:
-    lines = file_object.readlines()
-pi_string = ''
-for line in lines:
-    pi_string += line.strip()
-    message = pi_string.replace('python','c')  # 将文件中的python全部替换为c，并赋值给一个新的变量
-print(message)  # 打印新的变量
-"""
-# 写入文件
-# 写入空文件
-"""
-filename = 'programming.txt'
-with open(filename, 'w') as file_object:  # 在语句open()中，第二个实参'w'表示以写入模式打开文件
-                                          # 其他模式:‘r’:读取模式  ‘w’:写入模式  'a':附加模式  ‘r+’:读写模式
-                                          # 当省略模式实参时，以默认的只读形式打开文件
-                                          # 当以写入模式'w'打开文件时，如果指定的文件存在内容，则在返回文件对象前清空该文件的内容
-                                          # 在写入时，只能将字符串写入文本文件，要将数值数据存储到文本文件中，应先用函数str()将其转换成字符串格式
-    file_object.write('i love you')
-"""
-# 写入多行
-"""
-filename = 'programming.txt'
-with open(filename, 'w') as file_object:
-    file_object.write('i love you\n')  # 当使用写入模式'w'时，要让每个字符串都单独占一行，需要在方法调用write()中包含换行符
-    file_object.write('i love creating new games\n')
-"""
-# 附加到文件
-"""
-filename = 'programming.txt'
-with open(filename, 'a') as file_object:
-    file_object.write('i love you \n')
-    file_object.write('i love creating apps that can run in a browser.\n')
-"""
-"""
-filename = 'guest.txt'
-name = input('请输入你的名字:')
-with open(filename,'a') as file_object:
-    file_object.write(name)
-"""
-"""
-filename = 'guest_book.txt'
-active = True
-while active:
-    name = input("请输入你的名字:")
-    with open(filename, 'a') as file_object:
-        file_object.write(f"{name},你好\n")
-    if name == 'q':
-        break
-"""
-"""
-filename = 'yuanyin.txt'
-active = True
-while active:
-    name = input("请输入你的名字:")
-    reason = input("你为什么喜欢编程")
-    with open(filename,'a') as file_object:
-        file_object.write(f"{name}:{reason}\n")
-    if reason == 'q':
-        break
-"""
-# 异常:一个特殊对象，管理程序执行期间发生的错误
-# 异常模块: try-except
-# 处理ZeroDivisionError异常
-"""
-try:
-    print(5/0)
-except:
-    print("you can not divide by zero！")
-"""
-# 使用异常避免崩溃
-"""
-print("give me to numbers,and i will divide them.")
-print("enter 'q' to quit")
-active = True
-while active:
-    first_number = input("\nfirst number:")
-    if first_number == 'q':
-        break
-    second_number = input("\nsecond number:")
-    if second_number == 'q':
-        break
-    try:
-        answer = int(first_number) / int(second_number)
-    except ZeroDivisionError:
-        print("you can not divide by 0")
-    else:  # 依赖try代码块成功执行的代码都应该放到else中 
-           # 如果try模块中的代码成功运行，就使用else模块中的代码块 
-        print(answer)
-"""
-# try-except-else的工作原理:
-# 尝试执行try代码块中的代码，只有可能会引发异常的代码才需要放在try语句中
-# 一些仅在try代码块成功执行时才需要运行的代码放在else中执行
-# except代码块指出当出现异常时该怎么办
-# 处理FileNotFoundError异常(找不到文件）
-"""
-filename = 'alice.txt'
-try:
-    with open(filename, encoding='utf-8') as f:  # encoding='utf-8':给参数encoding指定了值，是在系统默认编码于要读取文件使用的编码不一致时必须的操作
-        contents = f.read()
-except FileNotFoundError:
-    print(f"sorry,the file {filename} does not exist")
-"""
-# 分析文本
-# 没有实例中所要的电子文本
-"""
-title = "Alice in Wonderland"
-ims = title.split() 
-print(ims)
-# 方法split():根据一个字符串创建一个单词列表,以空格为分隔符将字符串分拆成多个部分，并将这些部分存储到一个列表中
-"""
-"""
-filename = 'alice.txt'
-try:
-    with open(filename, 'encoding=utf-8') as f:
-        content = f.read()
-except:
-    print(f"sorry,the file {filename} does not exist")
-else:
-    words = content.split()
-    num_words = len(words)
-    print(f"the file {filename} has about {num_words} words")
-"""
-
-# 使用多个文件
-"""
-def count_words(filename):
-    try:
-        with open(filename, 'encoding=utf-8') as f:
-            contents = f.read()
-    except:
-        print(f"sorry,the file {filename} does not exist.")
-    else:
-        words = contents.split()
-        num_words = len(words)
-        print(f"the {filename} has about {num_words} words ")
-
-
-filename = 'programming.txt'
-count_words(filename)
-"""
-
-"""
-def count_words(filename):
-    try:
-        with open(filename, 'encoding=utf-8') as f:
-            contents = f.read()
-    except:
-        print(f"sorry,the file {filename} does not exist.")
-    else:
-        words = contents.split()
-        num_words = len(words)
-        print(f"the {filename} has about {num_words} words ")
-
-
-filenames = ['alice.txt', 'siddhartha.txt', 'moby_dick.txt', 'little_women.txt']
-for filename in filenames:
-    count_words(filename)
-# 没有这些电子文本，所以说全部跳转到异常处理except语句
-"""
-
-# 静默失败
-"""
-def count_words(filename):
-    try:
-        with open(filename, 'encoding=utf-8') as f:
-            contents = f.read()
-    except:
-        pass  # pass:在代码块中什么都不要做
-    else:
-        words = contents.split()
-        num_words = len(words)
-        print(f"the file {filename} has about {num_words} words")
-
-
-filenames = ['alice.txt', 'siddhartha.txt', 'moby_dick.txt', 'little_women.txt']
-for filename in filenames:
-    count_words(filename)
-"""
-
-# 决定报告哪些错误
-"""
-first_num = input("请输入第一个数:")
-second_num = input("请输入第二个数：")
-try:
-    p_num = int(first_num) + int(second_num)
-except:
-    print("请确保输入的数字喔")
-else:
-    print(p_num)
-"""
-
-"""
-active = True
-while active:
-    first_num = input("请输入第一个数:")
-    second_num = input("请输入第二个数：")
-    try:
-        p_num = int(first_num) + int(second_num)
-    except:
-        print("请确保输入的是数字喔")
-    else:
-        print(f"结果为{p_num}")
-"""
-
-"""
-def count_words(file):
-    try:
-        with open(file) as f:
-            contents = f.read()
-    except:
-        print("文件不存在喔")
-    else:
-        print(contents)
-
-
-files = ['cat.txt', 'dog.txt']
-for file in files:
-    count_words(file)
-"""
-"""
-def count_words(file):
-    try:
-        with open(file) as f:
-            contents = f.read()
-    except:
-        pass
-    else:
-        print(contents)
-
-
-files = ['cat.txt', 'dog.txt']
-for file in files:
-    count_words(file)
-"""
-# 存储数据
-# 使用json模块存储数据
-# 使用json.dump()(保存)和json.load()（读取）
-# json.dump()接受的实参:要存储的数据，可用于存储数据的文件对象
-"""
-import json
-numbers = [2,3,5,7,11,13]
-filename = 'numbers.json'
-with open(filename,'a') as f:
-    json.dump(numbers,f)
-"""
-"""
-import json
-filename = 'numbers.json'
-with open(filename) as f:
-    numbers = json.load(f)
-# json.load():将列表读取到内存中，即读取存储在文件中的信息，并将其赋值给变量
-
-print(numbers)
-"""
-# 保存和读取用户生成的数据
-# 保存
-'''
-import json
-
-username = input("请输入你的名字:")
-filename = 'username.json'
-with open(filename, 'a') as f:
-    json.dump(username, f)
-    print(f"we will remember you when you come back,{username}")
-'''
-
-# 读取
-"""
-import json
-filename = 'username.json'
-with open(filename) as f:
-    username = json.load(f)
-    print(f"welcome back,{username}")
-"""
-# 将保存和读取操作合并到一个程序中
-# 代码有一定问题
-"""
-import json
-
-filename = 'username.json'
-try:
-    with open(filename) as f:
-        username = json.load(f)
-except FileNotFoundError:
-    username = input("what is your name?")
-    with open(filename, 'w') as f:
-        json.dump(username, f)
-        print(f"we will remember you when you come back,{username}")
-else:
-    print(f"welcome back,{username}")
-"""
-# 重构
-# 重构让代码更清晰，更易于理解，更容易拓展
-"""
-import json
-
-
-def greet_user():
-    filename = 'username.json'
-    try:
-        with open(filename) as f:
-            username = json.load(f)
-    except FileNotFoundError:
-        username = input("what is your name?")
-        with open(filename, 'a') as f:
-            json.dump(username, f)
-            print(f"we will remember you when you come back ,{username}")
-    else:
-        print(f"welcome back,{username}!")
-
-
-greet_user()
-"""
-
-# 重构greet_user()
-"""
-import json
-
-
-def get_stored_username():
-    filename = 'username.json'
-    try:
-        with open(filename) as f:
-            username = json.load(f)
-    except:
-        return None
-    else:
-        return username
-
-
-def greet_user():
-    username = get_stored_username()
-    if username:
-        print(f"welcome back,{username}")
-    else:
-        username = input(f"what is your name?")
-        filename = 'username.json'
-        with open(filename, 'a') as f:
-            json.dump(username, f)
-            print(f"we will remember you when you come back,{username}")
-
-
-greet_user()
-"""
-# 最终版本
-"""
-import json
-
-
-def get_stored_username():
-    filename = 'username.json'
-    try:
-        with open(filename) as f:
-            username = json.load(f)
-    except:
-        return None
-    else:
-        return username
-
-
-def get_new_username():
-    username = input("请输入你的名字:")
-    filename = 'username.json'
-    with open(filename, 'a') as f:
-        json.dump(username, f)
-    return username
-
-
-def greet_user():
-    username = get_stored_username()
-    filename = 'username.json'
-    if username:
-        print(f"welcome back,{username}")
-    else:
-        with open(filename, 'w') as f:
-            json.dump(username, f)
-        print(f"we will remember you when you come back,{username}")
-
-
-greet_user()
-"""
-"""
-import json
-
-numbers = input("请输入你最喜欢的一个数字:")
-filename = 'like_numbers.json'
-with open(filename,'a') as f:
-    json.dump(numbers,f)  # 存储操作
-"""
-"""
-import json
-filename = 'like_numbers.json'
-with open(filename) as f:
-    numbers = json.load(f)  # 读取操作
-    print(f"用户最喜欢的数字是:{numbers}")
-"""
-"""
-import json
-
-filename = 'like_numbers.json'
-try:
-    with open(filename) as f:
-        numbers = json.load(f)
-        print(f"用户最喜欢的数字是:{numbers}")
-except:
-    print(f"没有收集任何数字")
-    print(f"请输入你最喜欢的数字:")
-    numbers = input()
-    with open(filename, 'w') as f:
-        json.dump(numbers, f)
-"""
-"""
-import json
-
-
-def get_stored_username():
-    filename = 'username.json'
-    try:
-        with open(filename) as f:
-            username = json.load(f)
-    except:
-        return None
-    else:
-        return username
-
-
-def get_new_username():
-    username = input("请输入你的名字:")
-    filename = 'username.json'
-    with open(filename, 'a') as f:
-        json.dump(username, f)
-    return username
-
-
-def greet_user():
-    username = get_stored_username()
-    filename = 'username.json'
-    if username:
-        correct = input(f"are you {username}?(y/n)")
-        if correct == 'y':
-            print(f"welcome back,{username}!")
-        else:
-            username = get_stored_username()
-            print(f"we will remember you when you come back,{username}!")
-    else:
-        username = get_stored_username()
-        print(f"we will remember you when you come back,{username}")
-
-greet_user()
-"""
-# 测试代码
-# 测试函数
-# 此处将get_formatted_name作为一个函数模块写在其他与程序同在的文件夹中
-"""
-from get_formatted_name import *
-print("enter 'q' at any time to quit")
-active = True
-while active:
-    first = input("\nplease give me a first name:")
-    if first == 'q':
-        break
-    medium = input("\nplease give me a medium name:")
-    if medium == 'q':
-        break
-    last = input("\nplease give me a last name:")
-    if last == 'q':
-        break
-    formatted_name = get_formatted_name(first,medium,last)
-    print({formatted_name})
-"""
-# 单元测试和测试用例
-# 单元测试:核实函数的某个方面没有问题
-# 测试用例:一组单元测试，核实函数再各种情况下的行为都符合要求
-# 全覆盖测试:全覆盖的测试用例包含一整套单元测试，涵盖了各种可能的函数使用方式
-# 可通过的测试
-"""
-import unittest
-from name_function import get_formatted_name
-
-
-class NamesTestCase(unittest.TestCase):  # 进行测试时必须继承unittest.TestCase类
-    def test_first_last(self):
-        formatted_name = get_formatted_name('janis', 'joplin')
-        self.assertEqual(formatted_name, 'Janis Joplin')  # 将formatted_name的值与字符串"Janis Joplin"比较
-        # 此处为unittest类的断言方法
-        # 断言方法核实到的结果是否与期望的结果一致
-        #self.assertEqual():第一个参数应为被测试的函数的运行结果，可以将这个结果赋值给一个变量，第二个参数应为期望中运行函数所得到的运行结果
-
-
-if __name__ == '__main__':
-    unittest.main()
-"""
-# 未通过的测试
-"""
-import unittest
-from name_function import get_formatted_name
-
-
-class NameTestCase(unittest.TestCase):
-    def test_first_middle_last(self):
-        formatted_name = get_formatted_name('janis', 'joplin')
-        self.assertEqual(formatted_name, 'Janis  Joplin')
-"""
-# 测试未通过时怎么办
-# 不要修改测试，应修改导致测试不能通过的代码
-# 检查对函数所做的更改，找出导致函数行为不符合预期的修改
-# 对之前函数的修改:
-"""
-import unittest
-from name_function import get_formatted_name
-
-
-class NameTestCase(unittest.TestCase):
-    def test_first_middle_last(self):
-        formatted_name = get_formatted_name('janis', 'joplin')
-        self.assertEqual(formatted_name, 'Janis Joplin')
-
-
-if __name__ == '__main__':
-    unittest.main()
-"""
-# 添加新测试
-"""
-import unittest
-from name_function import get_formatted_name
-
-
-class NameTestCase(unittest.TestCase):
-    def test_first_last_name(self):
-        formatted_name = get_formatted_name('janis', 'joplin')
-        self.assertEqual(formatted_name, 'Janis Joplin')
-
-    def test_first_middle_name(self):
-        formatted_name = get_formatted_name('wolfgang','mozart','amadeus')
-        self.assertEqual(formatted_name,'Wolfgang Amadeus Mozart')
-
-
-if __name__ == '__main__':
-    unittest.main()
-"""
-"""
-import unittest
-from City import city_functions
-
-
-class CityTestCase(unittest.TestCase):
-    def test_city_country(self):
-        ims = city_functions('santiago', 'chile')
-        self.assertEqual(ims, 'Santiago Chile - ')
-
-    def test_city_country_population(self):
-        ims = city_functions('santiago','chile',50000)
-        self.assertEqual(ims,'Santiago Chile - 50000')
-
-
-if __name__ == '__main__':
-    unittest.main()
-"""
-# 测试类
-# 各种断言方法:
-# asserEqual(a,b):核实a == b
-# assertNotEqual(a,b):核实a != b
-# assertTrue(x):核实x为True
-# assertFalse(x):核实x为False
-# assertIn(item,list):核实item在list种
-# assertNotIn(item,list):核实item不在list中
-# 一个要测试的类
-# 测试AnonymousSurvey类可以正确工作
-"""
-from survey import AnonymousSurvey
-
-question = "what language did you first learn to speak?"
-my_survey = AnonymousSurvey(question)
-# 显示问题并存储答案
-my_survey.show_question()
-print("enter 'q' at any time to quit.\n")
-active = True
-while active:
-    response = input("Language:")
-    if response == 'q':
-        break
-    my_survey.store_response(response)
-# 显示调查结果
-print("\nthank you to everyone who participated in the survey!")
-my_survey.show_results()
-"""
-# 对AnonymousSurvey类进行测试
-"""
-import unittest
-from survey import AnonymousSurvey
-
-
-class TestAnonymousSurvey(unittest.TestCase):
-    def test_store_single_response(self):
-        question = "what language did you first learn to speak?"
-        my_survey = AnonymousSurvey(question)
-        my_survey.store_response('English')
-        self.assertIn('English',my_survey.responses)
-
-    def test_store_three_responses(self):
-        question = "what language did you first learn to speak?"
-        my_survey = AnonymousSurvey(question)
-        responses = ['English', 'Spanish', 'Mandarin']
-        for response in responses:
-            my_survey.store_response(response)
-        for response in responses:
-            self.assertIn(response, my_survey.responses)
-        # 核实三个答案是否被保存于my_survey.responses之中
-
-
-if __name__ == '__main__':
-    unittest.main()
-"""
-# 方法setUp()
-"""
-import unittest
-from survey import AnonymousSurvey
-
-
-class TestAnonymousSurvey(unittest.TestCase):
-    # 针对AnonymousSurvey类的测试
-    def setUp(self):
-        # 创建一个调查对象和一组答案，供使用的测试方法使用
-        question = "what language did you first learn to speak?"
-        self.my_survey = AnonymousSurvey(question)
-        self.responses = ['English', 'Spanish', 'Mandarin']
-        #  setUp()创建了一个调查对象和一个答案列表
-    def test_store_single_response(self):
-        self.my_survey.store_response(self.responses[0])
-        self.assertIn(self.responses[0], self.my_survey.responses)
-
-    def test_store_three_responses(self):
-        for response in self.responses:
-            self.my_survey.store_response(response)
-        for response in self.responses:
-            self.assertIn(response, self.my_survey.responses)
-
-
-if __name__ == '__main__':
-    unittest.main()
-"""
-"""
-import unittest
-from employee import Employee
-
-
-class TestEmployee(unittest.TestCase):
-    def setUp(self):
-        self.eric = Employee('eric', 'mattes', 65000)
-
-    def test_give_default_raise(self):
-        self.eric.give_raise()
-        self.assertEqual(self.eric.salary, 70000)
-
-    def test_give_custom_raise(self):
-        self.eric.give_raise(10000)
-        self.assertEqual(self.eric.salary, 75000)
-
-
-if __name__ == '__main__':
-    unittest.main()
+labels = {
+    'phone':'phone number',
+    'addr':'address',
+}
+name = input("Name:")
+request = input("phone number(p) or address(a)?")
+if request == 'p':
+    key = 'phone'
+elif request == 'a':
+    key = 'addr'
+person = people.get(name,{})
+label = labels.get(key,key)
+result = person.get(key,'not available')
+if name in people:
+    print(f"{name}的{labels[key]}是{people[name][key]}")
+"""
+# items方法:返回一个包含所有字典项的列表
+# keys()方法:返回一个字典视图，包含指定字典中的键
+# pop()方法:获取与当前指定键相关联的值，并将改键值对从字典中删除
+"""
+d = {
+    'x': 1,
+    'y': 2,
+}
+i = d.pop('x')
+print(i)
+print(d)
+# 第二个输出表示，pop()已经将键值对’x‘:1从字典d中删除
+"""
+# popitem()方法:随机删除一对键值对
+# setdefault()方法:获取与指定键相关联的值，同时也可以再字典不包括指定的键时，在字典中添加指定的键值对
+"""
+d = {}
+i = d.setdefault('name','none')
+print(i)
+print(d)
+# 第二个输出表明，方法setdefult()在空字典d中添加了’name':'none'键值对
+d = {}
+i = d.setdefault('name','wyj')
+print(i)
+print(d)
+"""
+# update()方法:使用一个字典中的项来更新另一个字典
+# 对于通过参数提供的字典，将键值对添加到当前字典最后
+# 如果当前字典包含键相同的键值对，就替换它
+"""
+d = {
+    'title': 'python web site',
+    'url': 'http://www.python.org',
+    'changed': 'mar 14 22:09:15 met 2016',
+}
+x = {
+    'title': 'python language website'
+}
+d.update(x)
+print(d)
+y = {
+    'url': 'www.baidu.com'
+}
+d.update(y)
+print(d)
+# 第二个输出表明，当在字典中存在与想更新的字典相同的键时，将原本字典中相应的键的值替换为更新的键值对的值的内容
 """
