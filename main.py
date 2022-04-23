@@ -718,3 +718,293 @@ d.update(y)
 print(d)
 # 第二个输出表明，当在字典中存在与想更新的字典相同的键时，将原本字典中相应的键的值替换为更新的键值对的值的内容
 """
+# values()方法:返回一个由字典中的值组成的字典视图，不同于方法keys(),方法values()返回的视图可能包含重复的值
+"""
+d = {}
+d[1] = 1
+d[2] = 2
+d[3] = 3
+d[4] = 1
+print(d)
+i = d.values()
+print(i)
+"""
+# 第五章 条件，循环及其他语句
+# 再谈print和import
+# 打印多个参数
+"""
+print("age:","42")
+"""
+# 导入模块的方法
+"""
+import module
+from module import function
+from module import function1,function2,function3...
+from module import *  # 导入module模块中所有的函数
+from module as xxx  # 给导入的module模块重命名为xxx
+from module import fuction as xxx  # 给导入的函数function重命名为xxx
+当导入的多个模块中都含有同一个函数时:
+module1.function()
+module2.function() 
+"""
+# 赋值魔法
+# 序列解包
+# 可同时给多个变量赋值,可以交换多个变量的值
+"""
+x,y,z = 1,2,3
+print(x,y,z)
+x,y = y,x
+print(x,y,z)
+# 第二个输出表明，x与y的值已经交换了
+"""
+# 链式赋值
+"""
+x = y = function()
+等价于:
+y = function()
+x = y
+但不等价于:
+x = function()
+y = function()
+"""
+# 增强赋值  适用于所有标准运算符
+"""
+x += 1 == x = x + 1
+x *= 2 == x = x * 2 
+"""
+# 条件和条件语句
+# else子句
+# 可以在if语句中增加一种选择
+# elif子句
+# 检查多个条件时使用
+"""
+name = input("what is your name?\n")
+if name == 'wyj':
+    print(f"欢迎回来，{name}")
+else:
+    print(f"你不是他")
+"""
+"""
+name_endswith = input("请问你的名字是:")
+name_statrtswith = input("请问你的性别是?(m/w)")
+if name_endswith == 'wyj':
+    if name_statrtswith == 'm':
+        print(f"hello,mr.{name_endswith}")
+    elif name_statrtswith == 'w':
+        print(f"hello,mrs.{name_statrtswith}")
+else:
+    print("你不是他")
+"""
+# while循环
+"""
+x = 1
+active = True
+while active:
+    x += 1
+    print(x)
+    if x == 1000000:
+        break
+"""
+"""
+name = ''
+while not name:
+    name = input('please enter your name:')
+    print(f"hello,{name.title()}")
+"""
+# for循环
+"""
+words = ['this','is','an','ex','parrot']
+for word in words:
+    print(word)
+"""
+# 迭代字典
+"""
+d = {
+    'x':1,
+    'y':2,
+}
+for key in d:
+    print(f"{key}:{d[key]}")
+"""
+# 迭代工具
+# 并行迭代
+"""
+names = ['anne','beth','george','damon']
+ages = [12,45,32,102]
+for i in range(len(names)):
+    print(f"{names[i]}的年龄是{ages[i]}")
+"""
+# 函数zip()将两个序列缝合起来，并返回一个由元组组成的列表
+"""
+names = ['anne','beth','george','damon']
+ages = [12,45,32,102]
+i = list(zip(names,ages))
+print(i)
+"""
+# 迭代时获取索引:enumerate()函数
+"""
+for index,string in enumerate(strings):
+    if 'xxx' in string:
+        string[index] = '[censored]'
+"""
+# 反向迭代和排序后再迭代
+# reversed()和sorted()
+# 用于任何序列或可迭代的对象，返回反转和排序后的副本
+# 跳出循环
+# break跳出循环
+"""
+from math import sqrt
+
+for n in range(99, 0, -1):
+    root = sqrt(n)  # sqrt()函数:计算给定值的平方根
+    if root == int(root):
+        print(n)
+        break
+"""
+# continue跳出循环  结束当前迭代，并跳到下一次迭代开头，即跳过循环体中余下的语句，但不结束循环
+"""
+from math import sqrt
+
+for n in range(99, 0, -1):
+    root = sqrt(n)  # sqrt()函数:计算给定值的平方根
+    if root == int(root):
+        print(n)
+        continue
+"""
+"""
+d = ['st', 'nd', 'rd', 'th']
+for num in range(0,99):
+    num = num + 1
+    while num < 100:
+        if num == 1:
+            ims = d[0]
+        elif num == 2:
+            ims = d[1]
+        elif num == 3:
+            ims = d[2]
+        else:
+            ims = d[3]
+
+        word = input(f"please enter the {num} {ims} word:\n")
+        print(f"the word is {word}")
+        if word == ' ':
+            break
+"""
+# 循环中的else语句
+# 可以判断循环是否提前结束还是正常结束
+"""
+from math import sqrt
+
+for n in range(99,81,-1):
+    root = sqrt(n)
+    if root == int(root):
+        print(n)
+        break
+    else:
+        print("did not find it!")
+# 不正常的推出
+"""
+# 简单推导
+"""
+for x in range(10):
+    num = x*x
+    if num % 3 == 0:
+        print(x)
+        print(num)
+# 只打印能被3整除的平方值:
+# 使用求模运算符:如果返回值为0，则可以被3整除，如果返回值不是0，则不能被3整除
+"""
+# 三人行
+# 什么都不做:pass语句
+"""
+name = input()
+if name == "Ralph Auldus Melish":
+    print(f"hello,{name}")
+else:
+    pass
+"""
+# 使用del删除
+# 当指定内容为字典中的键时，则del语句删除键以及和键关联的值
+# del不能删除字典中的内容
+"""
+scoundrel = {
+    'age':42,
+    'first name':'Robin',
+    'last name':'of Locksley',
+}
+del scoundrel['age']
+print(scoundrel)
+"""
+# 使用exec和eval执行字符串及计算其结果
+# exec
+# 在使用exec语句时，在第二个参数的位置应提供一个字典用来存放变量
+# exec语句执行在字符串中的代码，这样做会无法控制代码的行为
+"""
+from math import sqrt
+scope = {}
+exec("sqrt = 1",scope)
+i = sqrt(4)
+print(i)
+print(scope)
+"""
+# eval语句
+"""
+i = eval(input("enter an air exp:"))
+print(i)
+"""
+
+# 抽象
+# 抽象即构造外部函数
+# 递归
+"""
+def recurison():
+    return recurison()
+
+
+recurison()
+"""
+
+"""
+def factorial(n):
+    result = n
+    for i in range(1, n):
+        result *= i
+    return result
+
+
+s = factorial(5)
+print(s)
+"""
+
+# 二分查找
+"""
+def search(sequence, number, lower, upper):
+    if lower == upper:
+        assert number == sequence[upper]
+        return upper
+    else:
+        middle = (lower + upper) // 2
+        if number > sequence[middle]:
+            return search(sequence, number, middle + 1, upper)
+        else:
+            return search(sequence, number, lower, middle)
+"""
+
+
+# 类
+"""
+class Person:
+    def name(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
+
+    def greet(self):
+        print(f"hello,world,i am {self.name}")
+
+
+person = Person()
+person.name('wyj')
+person.greet()
+"""
