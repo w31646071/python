@@ -1,4 +1,4 @@
-'''
+"""
 peoples = ['1', '2', '3', '4', '5']
 print(len(peoples))
 print(peoples)
@@ -29,18 +29,18 @@ for n in range(1):
     del peoples[n]
 del peoples[0]
 print(peoples)
-'''
-'''
+"""
+"""
 car = ['bmw','audi','toyota','subaru']
-'''
-'''
+
+
 car.sort()
 print(car)
 car.sort(reverse=True)
 print(car)
 print(sorted(car))
 print(car)
-'''
+"""
 '''
 car.reverse()
 print(car)
